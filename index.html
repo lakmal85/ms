@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>මානසික රෝග හඳුනාගැනීම - Mobile</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ----- Mobile-First Reset & Base ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans Sinhala', system-ui, -apple-system, sans-serif;
+            background: #f4f7fc;
+            color: #1a202c;
+            padding: 12px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .app-wrapper {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* ----- Header (Mobile First) ----- */
+        .app-header {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            border-radius: 16px;
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(26, 32, 44, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .app-header .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .app-header .brand i {
+            font-size: 28px;
+            color: #63b3ed;
+            background: rgba(99, 179, 237, 0.12);
+            padding: 8px;
+            border-radius: 14px;
+        }
+
+        .app-header .brand h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.2px;
+            line-height: 1.2;
+        }
+
+        .app-header .brand h1 span {
+            color: #63b3ed;
+        }
+
+        .app-header .badge {
+            background: rgba(99, 179, 237, 0.15);
+            color: #bee3f8;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            align-self: flex-start;
+        }
+
+        .app-header .badge i {
+            font-size: 12px;
+            color: #fc8181;
+        }
+
+        /* ----- Main Grid (Mobile: single column) ----- */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        /* ----- Cards ----- */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 18px 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .card-title i {
+            color: #4a6cf7;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .card-title .sub {
+            font-size: 12px;
+            font-weight: 400;
+            color: #718096;
+            margin-left: 2px;
+        }
+
+        /* ----- Patient Input (Mobile) ----- */
+        .patient-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f7fafc;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 18px;
+        }
+
+        .patient-input-group label {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .patient-input-group label i {
+            color: #4a6cf7;
+        }
+
+        .patient-input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            background: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+            color: #1a202c;
+            min-height: 48px;
+        }
+
+        .patient-input-group input:focus {
+            outline: none;
+            border-color: #4a6cf7;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+        }
+
+        .patient-input-group .hint {
+            font-size: 11px;
+            color: #a0aec0;
+            text-align: right;
+        }
+
+        /* ----- Symptoms (Mobile) ----- */
+        .symptom-category {
+            margin-bottom: 18px;
+        }
+
+        .symptom-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .symptom-category .cat-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #4a5568;
+            display: block;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #edf2f7;
+        }
+
+        .symptom-category .cat-label i {
+            margin-right: 8px;
+            color: #4a6cf7;
+            font-size: 14px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            transition: background 0.15s ease;
+            cursor: pointer;
+            background: #fafcff;
+            border: 1px solid #edf2f7;
+            min-height: 48px;
+        }
+
+        .checkbox-item:hover {
+            background: #f0f4ff;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: #4a6cf7;
+            cursor: pointer;
+            flex-shrink: 0;
+            border-radius: 6px;
+            transform: scale(1.0);
+        }
+
+        .checkbox-item label {
+            font-size: 14px;
+            color: #2d3748;
+            cursor: pointer;
+            user-select: none;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .checkbox-item .symptom-code {
+            font-size: 10px;
+            color: #a0aec0;
+            font-weight: 400;
+            background: #f7fafc;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+
+        /* ----- Voice Recording Section ----- */
+        .voice-recorder {
+            background: #f7fafc;
+            border-radius: 14px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            margin-top: 16px;
+        }
+
+        .voice-recorder .rec-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .voice-recorder .rec-header .rec-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .voice-recorder .rec-header .rec-title i {
+            color: #4a6cf7;
+        }
+
+        .voice-recorder .rec-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .voice-recorder .rec-status .rec-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #a0aec0;
+            transition: background 0.2s;
+        }
+
+        .voice-recorder .rec-status .rec-dot.recording {
+            background: #fc8181;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .voice-recorder .rec-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .voice-recorder .rec-controls .btn-rec {
+            flex: 1;
+            min-width: 80px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            touch-action: manipulation;
+            min-height: 48px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-rec-start {
+            background: #48bb78;
+            color: #fff;
+        }
+        .btn-rec-start:active {
+            transform: scale(0.96);
+        }
+        .btn-rec-stop {
+            background: #fc8181;
+            color: #fff;
+        }
+        .btn-rec-stop:active {
+            transform: scale(0.96);
+        }
+        .btn-rec-download {
+            background: #4a6cf7;
+            color: #fff;
+        }
+        .btn-rec-download:active {
+            transform: scale(0.96);
+        }
+        .btn-rec:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .voice-recorder .rec-timer {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d3748;
+            margin: 8px 0;
+        }
+
+        .voice-recorder .rec-file-name {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 6px;
+            word-break: break-all;
+        }
+
+        /* ----- Action Buttons (Mobile: stacked, full width) ----- */
+        .action-row {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            width: 100%;
+            touch-action: manipulation;
+            min-height: 52px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a6cf7, #6c5ce7);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(74, 108, 247, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+
+        .btn-secondary:active {
+            background: #e2e8f0;
+            transform: scale(0.97);
+        }
+
+        .btn i {
+            font-size: 18px;
+        }
+
+        /* ----- Report Section (Mobile) ----- */
+        .report-section {
+            margin-top: 16px;
+            display: none;
+            animation: fadeSlideUp 0.4s ease forwards;
+        }
+
+        .report-section.visible {
+            display: block;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .report-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 20px 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .report-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #edf2f7;
+            margin-bottom: 18px;
+        }
+
+        .report-header .patient-info h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a202c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .report-header .patient-info h2 i {
+            color: #4a6cf7;
+        }
+
+        .report-header .patient-info .meta {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .report-header .patient-info .meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .report-header .report-badge {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid #bee3f8;
+            align-self: flex-start;
+        }
+
+        /* Diagnosis Box (Mobile) */
+        .diagnosis-box {
+            background: linear-gradient(135deg, #f0f4ff, #e8edff);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+            border-left: 5px solid #4a6cf7;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .diagnosis-box .diag-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .diagnosis-box .diag-left i {
+            font-size: 28px;
+            color: #4a6cf7;
+            background: rgba(74, 108, 247, 0.12);
+            padding: 10px;
+            border-radius: 14px;
+        }
+
+        .diagnosis-box .diag-left .diag-text h3 {
+            font-size: 13px;
+            font-weight: 400;
+            color: #4a5568;
+        }
+
+        .diagnosis-box .diag-left .diag-text h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+
+        .diagnosis-box .diag-severity {
+            background: rgba(74, 108, 247, 0.12);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            align-self: flex-start;
+        }
+
+        .diagnosis-box .diag-severity .sev-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .sev-mild .sev-dot {
+            background: #48bb78;
+        }
+        .sev-moderate .sev-dot {
+            background: #ed8936;
+        }
+        .sev-severe .sev-dot {
+            background: #fc8181;
+        }
+
+        /* Charts (Mobile) */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin: 16px 0 20px;
+        }
+
+        .chart-box {
+            background: #f7fafc;
+            border-radius: 14px;
+            padding: 14px 10px 10px;
+            border: 1px solid #edf2f7;
+        }
+
+        .chart-box .chart-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .chart-box canvas {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 180px;
+        }
+
+        /* Summary Table (Mobile) */
+        .summary-section {
+            margin-top: 12px;
+        }
+
+        .summary-section h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-section h3 i {
+            color: #4a6cf7;
+        }
+
+        .summary-table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #edf2f7;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 320px;
+        }
+
+        .summary-table thead {
+            background: #f7fafc;
+        }
+
+        .summary-table th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #4a5568;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .summary-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #edf2f7;
+            color: #2d3748;
+        }
+
+        .summary-table .status-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-badge.present {
+            background: #fef2f2;
+            color: #c53030;
+        }
+
+        .summary-table .cat-tag {
+            font-size: 10px;
+            background: #e2e8f0;
+            padding: 2px 10px;
+            border-radius: 20px;
+            color: #4a5568;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Questions & Notes (Mobile) */
+        .question-item {
+            display: inline-block;
+            background: #f7fafc;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px 6px 4px 0;
+            font-size: 13px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .question-item i {
+            color: #38a169;
+            margin-right: 6px;
+        }
+
+        .notes-display {
+            background: #f7fafc;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-left: 4px solid #4a6cf7;
+            margin-top: 8px;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+
+        /* Report Footer */
+        .report-footer {
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+
+        .report-footer .print-btn {
+            background: none;
+            border: 1px solid #e2e8f0;
+            padding: 12px 20px;
+            border-radius: 30px;
+            color: #4a5568;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            touch-action: manipulation;
+            min-height: 48px;
+        }
+
+        .report-footer .print-btn:active {
+            background: #f7fafc;
+            transform: scale(0.97);
+        }
+
+        /* Preview Panel (Mobile) */
+        #previewStats {
+            padding: 16px 0;
+            font-size: 14px;
+        }
+
+        #previewCount span {
+            font-size: 28px;
+        }
+
+        #previewTags {
+            margin-top: 12px;
+            gap: 6px;
+        }
+        #previewTags span {
+            font-size: 11px !important;
+            padding: 4px 10px !important;
+        }
+
+        /* Toast (Mobile: bottom center) */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: #2d3748;
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 16px;
+            font-size: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 999;
+            pointer-events: none;
+            text-align: left;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast i {
+            font-size: 22px;
+            color: #68d391;
+            flex-shrink: 0;
+        }
+
+        /* Textarea for notes */
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-top: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+            background: #fafcff;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #4a6cf7;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.12);
+        }
+
+        /* Tablet / Desktop adjustments */
+        @media (min-width: 640px) {
+            .checkbox-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .action-row {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .action-row .btn {
+                width: auto;
+                flex: 1 1 auto;
+                min-width: 140px;
+            }
+
+            .report-header {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .report-header .report-badge {
+                align-self: center;
+            }
+
+            .diagnosis-box {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .diagnosis-box .diag-severity {
+                align-self: center;
+            }
+
+            .report-footer {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .report-footer .print-btn {
+                width: auto;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .app-header {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 24px;
+            }
+            .app-header .badge {
+                align-self: center;
+            }
+
+            .voice-recorder .rec-controls .btn-rec {
+                flex: 0 1 auto;
+                min-width: 100px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 28px;
+            }
+            body {
+                padding: 24px;
+            }
+            .card {
+                padding: 24px 28px;
+            }
+            .checkbox-item {
+                padding: 8px 12px;
+                min-height: 44px;
+            }
+            .btn {
+                min-height: 48px;
+                padding: 12px 28px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                padding: 0.3in;
+                background: #fff;
+            }
+            .app-header,
+            .action-row,
+            .btn,
+            .report-footer .print-btn,
+            .toast,
+            .no-print {
+                display: none !important;
+            }
+            .main-grid {
+                display: block !important;
+            }
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+            .report-section {
+                display: block !important;
+            }
+            .report-card {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+            .charts-grid {
+                page-break-inside: avoid;
+            }
+            .diagnosis-box {
+                border: 1px solid #4a6cf7 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .diagnosis-box .diag-left i {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .checkbox-item {
+                background: #fff !important;
+                border: 1px solid #eee !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper">
+
+        <!-- ===== HEADER ===== -->
+        <header class="app-header no-print">
+            <div class="brand">
+                <i class="fas fa-brain"></i>
+                <h1>මානසික රෝග <span>හඳුනාගැනීම</span></h1>
+            </div>
+            <div class="badge">
+                <i class="fas fa-user-secret"></i>
+                රෝගියාට නොදැන සලකුණු කරන්න
+                <i class="fas fa-lock" style="font-size:11px; color:#fc8181;"></i>
+            </div>
+        </header>
+
+        <!-- ===== MAIN GRID ===== -->
+        <div class="main-grid">
+
+            <!-- LEFT: Input Panel -->
+            <div class="card no-print">
+                <div class="card-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    ලක්ෂණ හා ප්‍රශ්න
+                    <span class="sub">— සාකච්ඡා අතරතුර</span>
+                </div>
+
+                <!-- Patient Name -->
+                <div class="patient-input-group">
+                    <label for="patientName"><i class="fas fa-user-circle"></i> රෝගියාගේ නම</label>
+                    <input type="text" id="patientName" placeholder="උදා: කුමාරි සිල්වා" />
+                    <span class="hint"><i class="fas fa-edit"></i> වාර්තාව හා ශ්‍රව්‍ය මෙම නමින් ලැබේ</span>
+                </div>
+
+                <form id="symptomForm">
+
+                    <!-- Category 1: Psychological -->
+                    <div class="symptom-category">
+                        <span class="cat-label"><i class="fas fa-heartbeat"></i> මනෝවිද්‍යාත්මක</span>
+                        <div class="checkbox-grid" data-category="psychological">
+                            <div class="checkbox-item"><input type="checkbox" id="sym1" value="මානසික අවපීඩනය" /><label for="sym1">මානසික අවපීඩනය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym2" value="කාංසාව" /><label for="sym2">කාංසාව</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym3" value="මනෝභාවයේ උච්චාවචනය" /><label for="sym3">මනෝභාවයේ උච්චාවචනය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym4" value="අතිශයෝක්තියෙන් යුත් සිතීම" /><label for="sym4">අතිශයෝක්තියෙන් යුත් සිතීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym5" value="ආත්ම විශ්වාසය අඩුවීම" /><label for="sym5">ආත්ම විශ්වාසය අඩුවීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym6" value="තනිකම" /><label for="sym6">තනිකම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym7" value="ආතතිය" /><label for="sym7">ආතතිය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym8" value="චිත්ත වේගය අඩුවීම" /><label for="sym8">චිත්ත වේගය අඩුවීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym9" value="උමතුව" /><label for="sym9">උමතුව</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym10" value="භීතිය" /><label for="sym10">භීතිය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym11" value="අධික කනස්සල්ල" /><label for="sym11">අධික කනස්සල්ල</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym12" value="ව්‍යාකූලත්වය" /><label for="sym12">ව්‍යාකූලත්වය</label></div>
+                        </div>
+                    </div>
+
+                    <!-- Category 2: Behavioral -->
+                    <div class="symptom-category">
+                        <span class="cat-label"><i class="fas fa-users"></i> චර්යාත්මක</span>
+                        <div class="checkbox-grid" data-category="behavioral">
+                            <div class="checkbox-item"><input type="checkbox" id="sym13" value="සමාජ විරුද්ධතාව" /><label for="sym13">සමාජ විරුද්ධතාව</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym14" value="කෝපය" /><label for="sym14">කෝපය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym15" value="බිය" /><label for="sym15">බිය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym16" value="තීරණ ගැනීමේ අපහසුව" /><label for="sym16">තීරණ ගැනීමේ අපහසුව</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym17" value="ආහාර ගැනීමේ අක්රමිකතා" /><label for="sym17">ආහාර ගැනීමේ අක්රමිකතා</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym18" value="සිතුවිලි එකතු වීම" /><label for="sym18">සිතුවිලි එකතු වීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym19" value="ආක්‍රමණශීලීත්වය" /><label for="sym19">ආක්‍රමණශීලීත්වය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym20" value="අධික ක්‍රියාකාරීත්වය" /><label for="sym20">අධික ක්‍රියාකාරීත්වය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym21" value="සමාජ හුදෙකලාව" /><label for="sym21">සමාජ හුදෙකලාව</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym22" value="පුනරාවර්තන හැසිරීම්" /><label for="sym22">පුනරාවර්තන හැසිරීම්</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym23" value="ආවේගශීලීත්වය" /><label for="sym23">ආවේගශීලීත්වය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym24" value="අධික කතාබහ" /><label for="sym24">අධික කතාබහ</label></div>
+                        </div>
+                    </div>
+
+                    <!-- Category 3: Physical & Cognitive -->
+                    <div class="symptom-category">
+                        <span class="cat-label"><i class="fas fa-bolt"></i> ශාරීරික හා සංජානන</span>
+                        <div class="checkbox-grid" data-category="physical">
+                            <div class="checkbox-item"><input type="checkbox" id="sym25" value="නින්ද නොයාම" /><label for="sym25">නින්ද නොයාම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym26" value="අවධානය යොමු කිරීමේ අපහසුව" /><label for="sym26">අවධානය යොමු කිරීමේ අපහසුව</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym27" value="මතකය දුර්වල වීම" /><label for="sym27">මතකය දුර්වල වීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym28" value="ශාරීරික රෝග ලක්ෂණ (හිසරදය, තෙහෙට්ටුව)" /><label for="sym28">ශාරීරික රෝග ලක්ෂණ</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym29" value="ආත්ම හානි" /><label for="sym29">ආත්ම හානි</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym30" value="මරණය පිළිබඳ සිතුවිලි" /><label for="sym30">මරණය පිළිබඳ සිතුවිලි</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym31" value="හිසරදය" /><label for="sym31">හිසරදය</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym32" value="ආහාර රුචිය වෙනස්වීම" /><label for="sym32">ආහාර රුචිය වෙනස්වීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym33" value="තෙහෙට්ටුව" /><label for="sym33">තෙහෙට්ටුව</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym34" value="ශ්වසන ගැටළු" /><label for="sym34">ශ්වසන ගැටළු</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym35" value="හෘද ස්පන්දන වේගය වැඩිවීම" /><label for="sym35">හෘද ස්පන්දන වේගය වැඩිවීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="sym36" value="කරකැවිල්ල" /><label for="sym36">කරකැවිල්ල</label></div>
+                        </div>
+                    </div>
+
+                    <!-- Questions Section -->
+                    <div class="symptom-category" style="margin-top:20px;">
+                        <span class="cat-label"><i class="fas fa-question-circle"></i> ඇසිය යුතු ප්‍රශ්න</span>
+                        <div class="checkbox-grid" data-category="questions">
+                            <div class="checkbox-item"><input type="checkbox" id="q1" value="නින්ද යන්නේ කෙසේද?" /><label for="q1">නින්ද යන්නේ කෙසේද?</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q2" value="ආහාර රුචිය කෙසේද?" /><label for="q2">ආහාර රුචිය කෙසේද?</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q3" value="බලාපොරොත්තු සුන්වීමක් දැනෙනවාද?" /><label for="q3">බලාපොරොත්තු සුන්වීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q4" value="උනන්දුව අඩු වී තිබේද?" /><label for="q4">උනන්දුව අඩුවීම</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q5" value="නිතර කාංසාවක් දැනෙනවාද?" /><label for="q5">නිතර කාංසාව</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q6" value="අන් අය සමඟ කතා කිරීමට අපහසු වෙනවාද?" /><label for="q6">සමාජ අන්තර්ක්‍රියා අපහසු</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q7" value="හදිසි මනෝභාව වෙනස්කම් ඇති වෙනවාද?" /><label for="q7">හදිසි මනෝභාව වෙනස්</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q8" value="ජීවිතයේ අර්ථය පිළිබඳ සිතුවිලි තිබේද?" /><label for="q8">ජීවිතයේ අර්ථය පිළිබඳ</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q9" value="ශාරීරික රෝග ලක්ෂණ තිබේද?" /><label for="q9">ශාරීරික රෝග ලක්ෂණ</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="q10" value="අවධානය ගැටළු තිබේද?" /><label for="q10">අවධානය ගැටළු</label></div>
+                        </div>
+                        <div style="margin-top:14px;">
+                            <label for="notesInput" style="font-weight:500; font-size:14px; color:#4a5568;"><i class="fas fa-pen"></i> සටහන් / අමතර තොරතුරු</label>
+                            <textarea id="notesInput" rows="3" placeholder="රෝගියාගේ පිළිතුරු හෝ අමතර සටහන්..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- ===== NEW: VOICE RECORDING ===== -->
+                    <div class="voice-recorder no-print">
+                        <div class="rec-header">
+                            <div class="rec-title"><i class="fas fa-microphone-alt"></i> හඬ පටිගත කිරීම</div>
+                            <div class="rec-status">
+                                <span class="rec-dot" id="recDot"></span>
+                                <span id="recStatusLabel">සූදානම්</span>
+                            </div>
+                        </div>
+                        <div class="rec-timer" id="recTimer">00:00</div>
+                        <div class="rec-controls">
+                            <button class="btn-rec btn-rec-start" id="recStartBtn"><i class="fas fa-play"></i> ආරම්භ</button>
+                            <button class="btn-rec btn-rec-stop" id="recStopBtn" disabled><i class="fas fa-stop"></i> නවත්වන්න</button>
+                            <button class="btn-rec btn-rec-download" id="recDownloadBtn" disabled><i class="fas fa-download"></i> බාගත</button>
+                        </div>
+                        <div class="rec-file-name" id="recFileName">ගොනු නාමය: —</div>
+                    </div>
+
+                    <div class="action-row">
+                        <button type="button" class="btn btn-primary" id="generateBtn">
+                            <i class="fas fa-file-alt"></i> වාර්තාව උත්පාදනය කරන්න
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-undo-alt"></i> සියල්ල ඉවත් කරන්න
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="selectAllBtn">
+                            <i class="fas fa-check-double"></i> සියල්ල තෝරන්න
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- RIGHT: Quick Preview -->
+            <div class="card no-print">
+                <div class="card-title">
+                    <i class="fas fa-chart-pie"></i>
+                    සාරාංශ පෙරදසුන
+                    <span class="sub">— තෝරාගත් ලක්ෂණ</span>
+                </div>
+                <div id="previewStats" style="text-align:center; padding:16px 0; color:#a0aec0;">
+                    <i class="fas fa-arrow-left" style="font-size:24px; display:block; margin-bottom:6px;"></i>
+                    වාර්තාව උත්පාදනයට<br />වම් පසින් ලක්ෂණ සලකුණු කරන්න.
+                </div>
+                <div id="previewCount" style="display:none; text-align:center; padding:10px 0; background:#f7fafc; border-radius:14px;">
+                    <span style="font-size:28px; font-weight:700; color:#4a6cf7;" id="countDisplay">0</span>
+                    <span style="color:#718096; font-size:13px; display:block;">රෝග ලක්ෂණ තෝරාගෙන ඇත</span>
+                </div>
+                <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap; justify-content:center;" id="previewTags">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== REPORT SECTION ===== -->
+        <div class="report-section" id="reportSection">
+
+            <div class="report-card" id="reportCard">
+
+                <!-- Report Header -->
+                <div class="report-header">
+                    <div class="patient-info">
+                        <h2><i class="fas fa-user-md"></i> <span id="reportPatientName">රෝගියා</span></h2>
+                        <div class="meta">
+                            <span><i class="far fa-calendar-alt"></i> <span id="reportDate"></span></span>
+                            <span><i class="far fa-clock"></i> <span id="reportTime"></span></span>
+                            <span><i class="fas fa-stethoscope"></i> මානසික වාර්තාව</span>
+                        </div>
+                    </div>
+                    <div class="report-badge">
+                        <i class="fas fa-shield-alt"></i> රහසිගත
+                    </div>
+                </div>
+
+                <!-- Diagnosis Box -->
+                <div class="diagnosis-box" id="diagnosisBox">
+                    <div class="diag-left">
+                        <i class="fas fa-stethoscope"></i>
+                        <div class="diag-text">
+                            <h3>අවසාන රෝග විනිශ්චය</h3>
+                            <h2 id="diagnosisTitle">—</h2>
+                        </div>
+                    </div>
+                    <div class="diag-severity" id="severityBadge">
+                        <span class="sev-dot"></span>
+                        <span id="severityLabel">බරපතලකම</span>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <div class="chart-box">
+                        <div class="chart-title"><i class="fas fa-chart-pie" style="margin-right:4px;"></i> කාණ්ඩ අනුපාතය</div>
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <div class="chart-title"><i class="fas fa-chart-bar" style="margin-right:4px;"></i> කාණ්ඩ අනුව ගණන</div>
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Summary Table -->
+                <div class="summary-section">
+                    <h3><i class="fas fa-list-ul"></i> සම්පූර්ණ රෝග ලක්ෂණ</h3>
+                    <div class="summary-table-wrap">
+                        <table class="summary-table" id="summaryTable">
+                            <thead>
+                                <tr><th>#</th><th>ලක්ෂණය</th><th>කාණ්ඩය</th><th>තත්වය</th></tr>
+                            </thead>
+                            <tbody id="summaryBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Questions & Notes -->
+                <div class="summary-section" id="questionsReportSection" style="margin-top:20px;">
+                    <h3><i class="fas fa-question-circle"></i> ඇසූ ප්‍රශ්න හා සටහන්</h3>
+                    <div id="questionsList" style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;"></div>
+                    <div id="notesDisplay" class="notes-display" style="display:none;"></div>
+                </div>
+
+                <!-- Recording info in report -->
+                <div class="summary-section" style="margin-top:16px;">
+                    <h3><i class="fas fa-microphone-alt"></i> ශ්‍රව්‍ය පටිගත කිරීම</h3>
+                    <div id="recordingReportInfo" style="font-size:14px; color:#4a5568;">
+                        <span id="recordingFileInfo">පටිගත කිරීමක් නැත</span>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="report-footer">
+                    <span>
+                        <i class="fas fa-print"></i> <span id="reportPatientNameFooter">රෝගියා</span> වෙනුවෙන්
+                    </span>
+                    <button class="print-btn" id="printBtn">
+                        <i class="fas fa-print"></i> මුද්‍රණය කරන්න
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMsg">වාර්තාව සාර්ථකව උත්පාදනය විය!</span>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- DOM refs -----
+            const patientNameInput = document.getElementById('patientName');
+            const generateBtn = document.getElementById('generateBtn');
+            const selectAllBtn = document.getElementById('selectAllBtn');
+            const resetBtn = document.querySelector('button[type="reset"]');
+            const reportSection = document.getElementById('reportSection');
+            const reportPatientName = document.getElementById('reportPatientName');
+            const reportPatientNameFooter = document.getElementById('reportPatientNameFooter');
+            const reportDate = document.getElementById('reportDate');
+            const reportTime = document.getElementById('reportTime');
+            const summaryBody = document.getElementById('summaryBody');
+            const previewCount = document.getElementById('previewCount');
+            const countDisplay = document.getElementById('countDisplay');
+            const previewTags = document.getElementById('previewTags');
+            const previewStats = document.getElementById('previewStats');
+            const printBtn = document.getElementById('printBtn');
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            const diagnosisTitle = document.getElementById('diagnosisTitle');
+            const severityLabel = document.getElementById('severityLabel');
+            const severityBadge = document.getElementById('severityBadge');
+            const questionsList = document.getElementById('questionsList');
+            const notesDisplay = document.getElementById('notesDisplay');
+            const notesInput = document.getElementById('notesInput');
+            const recordingFileInfo = document.getElementById('recordingFileInfo');
+
+            // Voice recording refs
+            const recStartBtn = document.getElementById('recStartBtn');
+            const recStopBtn = document.getElementById('recStopBtn');
+            const recDownloadBtn = document.getElementById('recDownloadBtn');
+            const recTimer = document.getElementById('recTimer');
+            const recStatusLabel = document.getElementById('recStatusLabel');
+            const recDot = document.getElementById('recDot');
+            const recFileName = document.getElementById('recFileName');
+
+            // ----- Recording variables -----
+            let mediaRecorder = null;
+            let audioChunks = [];
+            let recordingBlob = null;
+            let recordingFileName = '';
+            let timerInterval = null;
+            let seconds = 0;
+            let isRecording = false;
+
+            // ----- Symptoms & Questions -----
+            const symptomCheckboxes = document.querySelectorAll(
+                '#symptomForm .checkbox-grid:not([data-category="questions"]) input[type="checkbox"]');
+            const questionCheckboxes = document.querySelectorAll(
+                '#symptomForm .checkbox-grid[data-category="questions"] input[type="checkbox"]');
+
+            function getCategoryForCheckbox(el) {
+                const grid = el.closest('.checkbox-grid');
+                if (!grid) return 'වෙනත්';
+                const cat = grid.dataset.category;
+                const map = {
+                    'psychological': 'මනෝවිද්‍යාත්මක',
+                    'behavioral': 'චර්යාත්මක',
+                    'physical': 'ශාරීරික හා සංජානන',
+                    'questions': 'ප්‍රශ්න'
+                };
+                return map[cat] || 'වෙනත්';
+            }
+
+            let pieChartInstance = null;
+            let barChartInstance = null;
+
+            // ----- Toast helper -----
+            function showToast(msg, icon = 'fa-check-circle') {
+                toastMsg.textContent = msg;
+                toast.querySelector('i').className = 'fas ' + icon;
+                toast.classList.add('show');
+                clearTimeout(toast._hideTimer);
+                toast._hideTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+            }
+
+            // ----- Update preview (symptoms only) -----
+            function updatePreview() {
+                const checked = document.querySelectorAll(
+                    '#symptomForm .checkbox-grid:not([data-category="questions"]) input[type="checkbox"]:checked');
+                const count = checked.length;
+                if (count === 0) {
+                    previewCount.style.display = 'none';
+                    previewStats.style.display = 'block';
+                    previewTags.innerHTML = '';
+                    return;
+                }
+                previewStats.style.display = 'none';
+                previewCount.style.display = 'block';
+                countDisplay.textContent = count;
+
+                const names = Array.from(checked).map(el => el.value);
+                let tagsHtml = '';
+                const shown = names.slice(0, 5);
+                shown.forEach(name => {
+                    tagsHtml +=
+                        `<span style="background:#ebf8ff; color:#2b6cb0; padding:4px 10px; border-radius:30px; font-size:11px; font-weight:500; border:1px solid #bee3f8;">${name}</span>`;
+                });
+                if (names.length > 5) {
+                    tagsHtml +=
+                        `<span style="background:#edf2f7; color:#4a5568; padding:4px 10px; border-radius:30px; font-size:11px;">+${names.length - 5}</span>`;
+                }
+                previewTags.innerHTML = tagsHtml;
+            }
+
+            symptomCheckboxes.forEach(cb => cb.addEventListener('change', updatePreview));
+
+            // ----- Reset -----
+            resetBtn.addEventListener('click', function() {
+                document.querySelectorAll('#symptomForm input[type="checkbox"]').forEach(cb => cb.checked = false);
+                notesInput.value = '';
+                setTimeout(updatePreview, 50);
+                reportSection.classList.remove('visible');
+                destroyCharts();
+                // Also reset recording
+                if (isRecording) stopRecording();
+                recordingBlob = null;
+                recordingFileName = '';
+                recDownloadBtn.disabled = true;
+                recFileName.textContent = 'ගොනු නාමය: —';
+                recordingFileInfo.textContent = 'පටිගත කිරීමක් නැත';
+                showToast('සියල්ල ඉවත් කරන ලදී', 'fa-undo-alt');
+            });
+
+            // ----- Select all symptoms -----
+            selectAllBtn.addEventListener('click', function() {
+                symptomCheckboxes.forEach(cb => cb.checked = true);
+                updatePreview();
+                showToast('සියලු රෝග ලක්ෂණ තෝරාගන්නා ලදී', 'fa-check-double');
+            });
+
+            // ========== VOICE RECORDING ==========
+            // Generate filename from patient name and date
+            function generateRecordingFileName() {
+                const name = patientNameInput.value.trim() || 'රෝගියා';
+                const now = new Date();
+                const dateStr = now.getFullYear() + '-' +
+                    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(now.getDate()).padStart(2, '0') + '_' +
+                    String(now.getHours()).padStart(2, '0') + '-' +
+                    String(now.getMinutes()).padStart(2, '0') + '-' +
+                    String(now.getSeconds()).padStart(2, '0');
+                return `${name}_${dateStr}.wav`;
+            }
+
+            // Format time
+            function formatTime(sec) {
+                const m = String(Math.floor(sec / 60)).padStart(2, '0');
+                const s = String(sec % 60).padStart(2, '0');
+                return `${m}:${s}`;
+            }
+
+            // Start recording
+            async function startRecording() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    mediaRecorder.ondataavailable = event => {
+                        if (event.data.size > 0) {
+                            audioChunks.push(event.data);
+                        }
+                    };
+                    mediaRecorder.onstop = () => {
+                        const blob = new Blob(audioChunks, { type: 'audio/wav' });
+                        recordingBlob = blob;
+                        recordingFileName = generateRecordingFileName();
+                        recFileName.textContent = `ගොනු නාමය: ${recordingFileName}`;
+                        recDownloadBtn.disabled = false;
+                        recordingFileInfo.textContent = `ශ්‍රව්‍ය පටිගත කිරීම: ${recordingFileName}`;
+                        // Stop timer
+                        clearInterval(timerInterval);
+                        recDot.classList.remove('recording');
+                        recStatusLabel.textContent = 'නැවතුම';
+                        isRecording = false;
+                        recStartBtn.disabled = false;
+                        recStopBtn.disabled = true;
+                        showToast('පටිගත කිරීම නවතා ඇත', 'fa-stop-circle');
+                    };
+                    mediaRecorder.start();
+                    isRecording = true;
+                    recStartBtn.disabled = true;
+                    recStopBtn.disabled = false;
+                    recDot.classList.add('recording');
+                    recStatusLabel.textContent = 'පටිගත කරමින්...';
+                    seconds = 0;
+                    recTimer.textContent = formatTime(0);
+                    timerInterval = setInterval(() => {
+                        seconds++;
+                        recTimer.textContent = formatTime(seconds);
+                    }, 1000);
+                    showToast('පටිගත කිරීම ආරම්භ විය', 'fa-microphone');
+                } catch (err) {
+                    console.error(err);
+                    showToast('මයික්‍රෆෝනය භාවිතා කළ නොහැක. අවසරය පරීක්ෂා කරන්න.', 'fa-exclamation-triangle');
+                }
+            }
+
+            function stopRecording() {
+                if (mediaRecorder && isRecording) {
+                    mediaRecorder.stop();
+                    // Stop all tracks
+                    mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                    clearInterval(timerInterval);
+                    recDot.classList.remove('recording');
+                    recStatusLabel.textContent = 'නැවතුම';
+                    isRecording = false;
+                    recStartBtn.disabled = false;
+                    recStopBtn.disabled = true;
+                }
+            }
+
+            // Download recording
+            function downloadRecording() {
+                if (recordingBlob) {
+                    const url = URL.createObjectURL(recordingBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = recordingFileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                    showToast('ශ්‍රව්‍ය ගොනුව බාගත වෙමින්...', 'fa-download');
+                }
+            }
+
+            // Event listeners for recording
+            recStartBtn.addEventListener('click', startRecording);
+            recStopBtn.addEventListener('click', stopRecording);
+            recDownloadBtn.addEventListener('click', downloadRecording);
+
+            // If user leaves page, stop recording
+            window.addEventListener('beforeunload', function() {
+                if (isRecording) stopRecording();
+            });
+
+            // ===== Diagnosis engine =====
+            function generateDiagnosis(symptoms) {
+                const names = symptoms.map(s => s.name);
+                const cats = symptoms.map(s => s.category);
+                const catCount = {};
+                cats.forEach(c => catCount[c] = (catCount[c] || 0) + 1);
+                const psychCount = catCount['මනෝවිද්‍යාත්මක'] || 0;
+                const behavCount = catCount['චර්යාත්මක'] || 0;
+                const physCount = catCount['ශාරීරික හා සංජානන'] || 0;
+                const total = symptoms.length;
+
+                const hasDepression = names.includes('මානසික අවපීඩනය');
+                const hasAnxiety = names.includes('කාංසාව');
+                const hasMoodSwing = names.includes('මනෝභාවයේ උච්චාවචනය');
+                const hasFear = names.includes('භීතිය');
+                const hasSelfHarm = names.includes('ආත්ම හානි');
+                const hasDeathThoughts = names.includes('මරණය පිළිබඳ සිතුවිලි');
+                const hasSleepIssue = names.includes('නින්ද නොයාම');
+                const hasSocialWithdrawal = names.includes('සමාජ හුදෙකලාව');
+                const hasAggression = names.includes('ආක්‍රමණශීලීත්වය');
+                const hasHyperactivity = names.includes('අධික ක්‍රියාකාරීත්වය');
+                const hasObsession = names.includes('උමතුව');
+                const hasPanic = names.includes('අධික කනස්සල්ල');
+                const hasConfusion = names.includes('ව්‍යාකූලත්වය');
+
+                let diagnosis = 'මානසික සෞඛ්‍ය තක්සේරුව';
+                let severity = 'මධ්‍යස්ථ';
+                let sevClass = 'sev-moderate';
+
+                if (hasSelfHarm || hasDeathThoughts) {
+                    diagnosis = 'බරපතල මානසික අවපීඩනය (Suicidal Ideation)';
+                    severity = 'අතිශය බරපතල';
+                    sevClass = 'sev-severe';
+                } else if (psychCount >= 5 && hasDepression && hasAnxiety && (hasSleepIssue || hasDeathThoughts)) {
+                    diagnosis = 'බරපතල කාංසා-අවපීඩන ආබාධය';
+                    severity = 'බරපතල';
+                    sevClass = 'sev-severe';
+                } else if (psychCount >= 4 && hasDepression && hasAnxiety) {
+                    diagnosis = 'මානසික අවපීඩන හා කාංසා ආබාධය';
+                    severity = 'බරපතල';
+                    sevClass = 'sev-severe';
+                } else if (hasMoodSwing && behavCount >= 3) {
+                    diagnosis = 'මනෝභාව ආබාධය (Bipolar Spectrum)';
+                    severity = 'බරපතල';
+                    sevClass = 'sev-severe';
+                } else if (hasObsession && (hasPanic || hasFear)) {
+                    diagnosis = 'උමතු-බලවත් ආබාධය (OCD / Panic)';
+                    severity = 'මධ්‍යස්ථ-බරපතල';
+                    sevClass = 'sev-moderate';
+                } else if (hasSocialWithdrawal && hasFear && hasAnxiety) {
+                    diagnosis = 'සමාජ කාංසා ආබාධය';
+                    severity = 'මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                } else if (hasAggression && hasHyperactivity) {
+                    diagnosis = 'හැසිරීම් ආබාධය (ADHD Spectrum)';
+                    severity = 'මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                } else if (psychCount >= 3 && hasDepression) {
+                    diagnosis = 'මානසික අවපීඩන ආබාධය';
+                    severity = 'මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                } else if (psychCount >= 3 && hasAnxiety) {
+                    diagnosis = 'කාංසා ආබාධය';
+                    severity = 'මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                } else if (physCount >= 4 && hasSleepIssue) {
+                    diagnosis = 'ශාරීරික රෝග ලක්ෂණ සහිත ආබාධය';
+                    severity = 'මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                } else if (total >= 6) {
+                    diagnosis = 'සංකීර්ණ මානසික සෞඛ්‍ය ගැටළු';
+                    severity = 'මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                } else if (total >= 3) {
+                    diagnosis = 'මානසික සෞඛ්‍ය අවදානම';
+                    severity = 'මෘදු-මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                } else if (total >= 1) {
+                    diagnosis = 'මෘදු මානසික රෝග ලක්ෂණ';
+                    severity = 'මෘදු';
+                    sevClass = 'sev-mild';
+                }
+                if (total >= 10 && sevClass !== 'sev-severe') {
+                    severity = 'බරපතල';
+                    sevClass = 'sev-severe';
+                } else if (total >= 6 && sevClass === 'sev-mild') {
+                    severity = 'මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                }
+                return { diagnosis, severity, sevClass };
+            }
+
+            // ----- Generate Report -----
+            generateBtn.addEventListener('click', function() {
+                const name = patientNameInput.value.trim() || 'රෝගියා';
+                const checkedSymptoms = document.querySelectorAll(
+                    '#symptomForm .checkbox-grid:not([data-category="questions"]) input[type="checkbox"]:checked');
+                if (checkedSymptoms.length === 0) {
+                    showToast('කරුණාකර අවම වශයෙන් එක් රෝග ලක්ෂණයක් හෝ තෝරන්න', 'fa-exclamation-triangle');
+                    return;
+                }
+
+                const symptoms = [];
+                checkedSymptoms.forEach(cb => {
+                    symptoms.push({ name: cb.value, category: getCategoryForCheckbox(cb) });
+                });
+
+                const checkedQuestions = document.querySelectorAll(
+                    '#symptomForm .checkbox-grid[data-category="questions"] input[type="checkbox"]:checked');
+                const questionTexts = Array.from(checkedQuestions).map(cb => cb.value);
+                const notes = notesInput.value.trim();
+
+                // Set patient name
+                reportPatientName.textContent = name;
+                reportPatientNameFooter.textContent = name;
+
+                const now = new Date();
+                const dateOpts = { year: 'numeric', month: 'short', day: 'numeric' };
+                const timeOpts = { hour: '2-digit', minute: '2-digit' };
+                reportDate.textContent = now.toLocaleDateString('si-LK', dateOpts);
+                reportTime.textContent = now.toLocaleTimeString('si-LK', timeOpts);
+
+                // Summary table
+                let html = '';
+                symptoms.forEach((s, idx) => {
+                    const catColors = {
+                        'මනෝවිද්‍යාත්මක': '#ebf8ff',
+                        'චර්යාත්මක': '#fefcbf',
+                        'ශාරීරික හා සංජානන': '#f0fff4'
+                    };
+                    const bg = catColors[s.category] || '#f7fafc';
+                    html += `<tr>
+                        <td>${idx + 1}</td>
+                        <td><strong>${s.name}</strong></td>
+                        <td><span class="cat-tag" style="background:${bg};">${s.category}</span></td>
+                        <td><span class="status-badge present"><i class="fas fa-check-circle" style="font-size:10px;"></i> පවතී</span></td>
+                    </tr>`;
+                });
+                summaryBody.innerHTML = html;
+
+                // Diagnosis
+                const diag = generateDiagnosis(symptoms);
+                diagnosisTitle.textContent = diag.diagnosis;
+                severityLabel.textContent = diag.severity;
+                severityBadge.className = 'diag-severity ' + diag.sevClass;
+
+                // Questions & Notes
+                if (questionTexts.length === 0 && notes === '') {
+                    questionsList.innerHTML = '<span style="color:#a0aec0; font-size:13px;">ප්‍රශ්න කිසිවක් සලකුණු කර නොමැත.</span>';
+                    notesDisplay.style.display = 'none';
+                } else {
+                    let qHtml = '';
+                    questionTexts.forEach(q => {
+                        qHtml += `<span class="question-item"><i class="fas fa-check-circle"></i> ${q}</span>`;
+                    });
+                    questionsList.innerHTML = qHtml || '<span style="color:#a0aec0;">ප්‍රශ්න නැත.</span>';
+                    if (notes) {
+                        notesDisplay.textContent = notes;
+                        notesDisplay.style.display = 'block';
+                    } else {
+                        notesDisplay.style.display = 'none';
+                    }
+                }
+
+                // Recording info in report
+                if (recordingBlob) {
+                    recordingFileInfo.textContent = `ශ්‍රව්‍ය පටිගත කිරීම: ${recordingFileName} (${formatTime(seconds)} තත්පර)`;
+                } else {
+                    recordingFileInfo.textContent = 'පටිගත කිරීමක් නැත';
+                }
+
+                reportSection.classList.add('visible');
+
+                // Charts
+                const catCount = {};
+                symptoms.forEach(s => {
+                    catCount[s.category] = (catCount[s.category] || 0) + 1;
+                });
+                const categories = Object.keys(catCount);
+                const counts = Object.values(catCount);
+
+                const colorMap = {
+                    'මනෝවිද්‍යාත්මක': '#4a6cf7',
+                    'චර්යාත්මක': '#ed8936',
+                    'ශාරීරික හා සංජානන': '#38a169'
+                };
+                const bgColors = categories.map(c => colorMap[c] || '#a0aec0');
+
+                destroyCharts();
+
+                const pieCtx = document.getElementById('pieChart').getContext('2d');
+                pieChartInstance = new Chart(pieCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: categories,
+                        datasets: [{
+                            data: counts,
+                            backgroundColor: bgColors,
+                            borderColor: '#ffffff',
+                            borderWidth: 2,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 12,
+                                    usePointStyle: true } },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(ctx) {
+                                        const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                        const pct = total > 0 ? ((ctx.parsed / total) * 100).toFixed(1) : 0;
+                                        return ctx.label + ': ' + ctx.parsed + ' (' + pct + '%)';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                const barCtx = document.getElementById('barChart').getContext('2d');
+                barChartInstance = new Chart(barCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: categories,
+                        datasets: [{
+                            label: 'රෝග ලක්ෂණ',
+                            data: counts,
+                            backgroundColor: bgColors.map(c => c + 'CC'),
+                            borderColor: bgColors,
+                            borderWidth: 2,
+                            borderRadius: 6,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 10 } },
+                                grid: { color: 'rgba(0,0,0,0.04)' } },
+                            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+                        }
+                    }
+                });
+
+                showToast(`"${name}" සඳහා වාර්තාව සාර්ථකයි!`, 'fa-file-alt');
+            });
+
+            function destroyCharts() {
+                if (pieChartInstance) { pieChartInstance.destroy();
+                    pieChartInstance = null; }
+                if (barChartInstance) { barChartInstance.destroy();
+                    barChartInstance = null; }
+            }
+
+            // ----- Print -----
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+
+            // ----- Initial preview update -----
+            updatePreview();
+
+            // ----- Enter key on patient name triggers generate -----
+            patientNameInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    generateBtn.click();
+                }
+            });
+
+            // ----- Touch feedback for mobile -----
+            document.querySelectorAll('.btn, .checkbox-item, .btn-rec').forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.7';
+                }, { passive: true });
+                el.addEventListener('touchend', function() {
+                    this.style.opacity = '1';
+                }, { passive: true });
+            });
+
+            console.log('✅ Mobile Mental Health App with Voice Recording loaded.');
+        })();
+    </script>
+
+</body>
+</html>
