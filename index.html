@@ -12,14 +12,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
-        /* ----- Mobile-First Reset & Base ----- */
+        /* ----- Mobile-First Reset & Base (unchanged) ----- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-
         body {
             font-family: 'Segoe UI', 'Noto Sans Sinhala', system-ui, -apple-system, sans-serif;
             background: #f4f7fc;
@@ -31,14 +30,11 @@
             align-items: flex-start;
             -webkit-font-smoothing: antialiased;
         }
-
         .app-wrapper {
             max-width: 100%;
             width: 100%;
             margin: 0 auto;
         }
-
-        /* ----- Header (Mobile First) ----- */
         .app-header {
             background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
             border-radius: 16px;
@@ -50,13 +46,11 @@
             box-shadow: 0 8px 20px rgba(26, 32, 44, 0.2);
             margin-bottom: 20px;
         }
-
         .app-header .brand {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
         .app-header .brand i {
             font-size: 28px;
             color: #63b3ed;
@@ -64,31 +58,26 @@
             padding: 8px;
             border-radius: 14px;
         }
-
         .app-header .brand .title-group {
             display: flex;
             flex-direction: column;
             line-height: 1.2;
         }
-
         .app-header .brand .title-group h1 {
             font-size: 18px;
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 0.2px;
         }
-
         .app-header .brand .title-group h1 span {
             color: #63b3ed;
         }
-
         .app-header .brand .title-group .sub-title {
             font-size: 12px;
             color: #a0aec0;
             font-weight: 400;
             letter-spacing: 0.3px;
         }
-
         .app-header .badge-group {
             display: flex;
             flex-wrap: wrap;
@@ -96,7 +85,6 @@
             align-items: center;
             justify-content: flex-start;
         }
-
         .app-header .badge {
             background: rgba(99, 179, 237, 0.15);
             color: #bee3f8;
@@ -111,36 +99,28 @@
             backdrop-filter: blur(4px);
             white-space: nowrap;
         }
-
         .app-header .badge i {
             font-size: 11px;
             color: #fc8181;
         }
-
         .app-header .badge.student {
             background: rgba(255, 255, 255, 0.08);
             color: #e2e8f0;
             border-color: rgba(255, 255, 255, 0.1);
         }
-
-        /* ----- Main Grid (Mobile: single column) ----- */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 18px;
             margin-bottom: 24px;
         }
-
-        /* ----- Cards ----- */
         .card {
             background: #ffffff;
             border-radius: 18px;
             padding: 18px 16px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
             border: 1px solid rgba(0, 0, 0, 0.02);
-            transition: box-shadow 0.2s ease;
         }
-
         .card-title {
             font-size: 16px;
             font-weight: 600;
@@ -151,22 +131,18 @@
             gap: 8px;
             flex-wrap: wrap;
         }
-
         .card-title i {
             color: #4a6cf7;
             font-size: 18px;
             width: 24px;
             text-align: center;
         }
-
         .card-title .sub {
             font-size: 12px;
             font-weight: 400;
             color: #718096;
             margin-left: 2px;
         }
-
-        /* ----- Patient Input (Mobile) ----- */
         .patient-input-group {
             display: flex;
             flex-direction: column;
@@ -177,7 +153,6 @@
             border: 1px solid #e2e8f0;
             margin-bottom: 18px;
         }
-
         .patient-input-group label {
             font-weight: 600;
             color: #2d3748;
@@ -186,11 +161,9 @@
             align-items: center;
             gap: 8px;
         }
-
         .patient-input-group label i {
             color: #4a6cf7;
         }
-
         .patient-input-group input {
             width: 100%;
             padding: 12px 14px;
@@ -203,28 +176,22 @@
             color: #1a202c;
             min-height: 48px;
         }
-
         .patient-input-group input:focus {
             outline: none;
             border-color: #4a6cf7;
             box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
         }
-
         .patient-input-group .hint {
             font-size: 11px;
             color: #a0aec0;
             text-align: right;
         }
-
-        /* ----- Symptoms (Mobile) ----- */
         .symptom-category {
             margin-bottom: 18px;
         }
-
         .symptom-category:last-child {
             margin-bottom: 0;
         }
-
         .symptom-category .cat-label {
             font-weight: 600;
             font-size: 14px;
@@ -234,19 +201,16 @@
             padding-bottom: 6px;
             border-bottom: 2px solid #edf2f7;
         }
-
         .symptom-category .cat-label i {
             margin-right: 8px;
             color: #4a6cf7;
             font-size: 14px;
         }
-
         .checkbox-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 6px;
         }
-
         .checkbox-item {
             display: flex;
             align-items: center;
@@ -259,11 +223,9 @@
             border: 1px solid #edf2f7;
             min-height: 48px;
         }
-
         .checkbox-item:hover {
             background: #f0f4ff;
         }
-
         .checkbox-item input[type="checkbox"] {
             width: 22px;
             height: 22px;
@@ -273,7 +235,6 @@
             border-radius: 6px;
             transform: scale(1.0);
         }
-
         .checkbox-item label {
             font-size: 14px;
             color: #2d3748;
@@ -282,7 +243,6 @@
             line-height: 1.3;
             flex: 1;
         }
-
         .checkbox-item .symptom-code {
             font-size: 10px;
             color: #a0aec0;
@@ -291,8 +251,6 @@
             padding: 2px 10px;
             border-radius: 12px;
         }
-
-        /* ----- Voice Recording Section ----- */
         .voice-recorder {
             background: #f7fafc;
             border-radius: 14px;
@@ -300,14 +258,12 @@
             border: 1px solid #e2e8f0;
             margin-top: 16px;
         }
-
         .voice-recorder .rec-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 12px;
         }
-
         .voice-recorder .rec-header .rec-title {
             font-weight: 600;
             font-size: 14px;
@@ -316,11 +272,9 @@
             align-items: center;
             gap: 8px;
         }
-
         .voice-recorder .rec-header .rec-title i {
             color: #4a6cf7;
         }
-
         .voice-recorder .rec-status {
             display: flex;
             align-items: center;
@@ -328,7 +282,6 @@
             font-size: 13px;
             color: #718096;
         }
-
         .voice-recorder .rec-status .rec-dot {
             width: 12px;
             height: 12px;
@@ -336,12 +289,10 @@
             background: #a0aec0;
             transition: background 0.2s;
         }
-
         .voice-recorder .rec-status .rec-dot.recording {
             background: #fc8181;
             animation: pulse 1s infinite;
         }
-
         @keyframes pulse {
             0% {
                 opacity: 1;
@@ -356,13 +307,11 @@
                 transform: scale(1);
             }
         }
-
         .voice-recorder .rec-controls {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
-
         .voice-recorder .rec-controls .btn-rec {
             flex: 1;
             min-width: 80px;
@@ -380,7 +329,6 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-
         .btn-rec-start {
             background: #48bb78;
             color: #fff;
@@ -406,22 +354,18 @@
             opacity: 0.5;
             pointer-events: none;
         }
-
         .voice-recorder .rec-timer {
             font-size: 14px;
             font-weight: 500;
             color: #2d3748;
             margin: 8px 0;
         }
-
         .voice-recorder .rec-file-name {
             font-size: 12px;
             color: #718096;
             margin-top: 6px;
             word-break: break-all;
         }
-
-        /* ----- Action Buttons (Mobile: stacked, full width) ----- */
         .action-row {
             display: flex;
             flex-direction: column;
@@ -430,7 +374,6 @@
             padding-top: 18px;
             border-top: 1px solid #edf2f7;
         }
-
         .btn {
             padding: 14px 20px;
             border: none;
@@ -448,42 +391,33 @@
             touch-action: manipulation;
             min-height: 52px;
         }
-
         .btn-primary {
             background: linear-gradient(135deg, #4a6cf7, #6c5ce7);
             color: #fff;
             box-shadow: 0 4px 14px rgba(74, 108, 247, 0.3);
         }
-
         .btn-primary:active {
             transform: scale(0.97);
         }
-
         .btn-secondary {
             background: #edf2f7;
             color: #2d3748;
         }
-
         .btn-secondary:active {
             background: #e2e8f0;
             transform: scale(0.97);
         }
-
         .btn i {
             font-size: 18px;
         }
-
-        /* ----- Report Section (Mobile) ----- */
         .report-section {
             margin-top: 16px;
             display: none;
             animation: fadeSlideUp 0.4s ease forwards;
         }
-
         .report-section.visible {
             display: block;
         }
-
         @keyframes fadeSlideUp {
             from {
                 opacity: 0;
@@ -494,7 +428,6 @@
                 transform: translateY(0);
             }
         }
-
         .report-card {
             background: #ffffff;
             border-radius: 18px;
@@ -502,7 +435,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             border: 1px solid #e2e8f0;
         }
-
         .report-header {
             display: flex;
             flex-direction: column;
@@ -511,7 +443,6 @@
             border-bottom: 2px solid #edf2f7;
             margin-bottom: 18px;
         }
-
         .report-header .patient-info h2 {
             font-size: 20px;
             font-weight: 700;
@@ -520,11 +451,9 @@
             align-items: center;
             gap: 8px;
         }
-
         .report-header .patient-info h2 i {
             color: #4a6cf7;
         }
-
         .report-header .patient-info .meta {
             font-size: 12px;
             color: #718096;
@@ -533,13 +462,11 @@
             flex-wrap: wrap;
             gap: 12px;
         }
-
         .report-header .patient-info .meta span {
             display: inline-flex;
             align-items: center;
             gap: 4px;
         }
-
         .report-header .report-badge {
             background: #ebf8ff;
             color: #2b6cb0;
@@ -550,8 +477,6 @@
             border: 1px solid #bee3f8;
             align-self: flex-start;
         }
-
-        /* Diagnosis Box (Mobile) */
         .diagnosis-box {
             background: linear-gradient(135deg, #f0f4ff, #e8edff);
             border-radius: 14px;
@@ -562,14 +487,12 @@
             flex-direction: column;
             gap: 12px;
         }
-
         .diagnosis-box .diag-left {
             display: flex;
             align-items: flex-start;
             gap: 14px;
             flex: 1;
         }
-
         .diagnosis-box .diag-left i {
             font-size: 28px;
             color: #4a6cf7;
@@ -578,17 +501,14 @@
             border-radius: 14px;
             margin-top: 2px;
         }
-
         .diagnosis-box .diag-left .diag-text {
             flex: 1;
         }
-
         .diagnosis-box .diag-left .diag-text h3 {
             font-size: 13px;
             font-weight: 400;
             color: #4a5568;
         }
-
         .diagnosis-box .diag-left .diag-text h2 {
             font-size: 18px;
             font-weight: 700;
@@ -596,7 +516,6 @@
             margin-top: 2px;
             line-height: 1.3;
         }
-
         .diagnosis-box .diag-left .diag-text .diag-category {
             font-size: 13px;
             color: #4a5568;
@@ -607,13 +526,11 @@
             display: inline-block;
             border: 1px solid rgba(74, 108, 247, 0.15);
         }
-
         .diagnosis-box .diag-left .diag-text .diag-category i {
             font-size: 12px;
             color: #4a6cf7;
             margin-right: 4px;
         }
-
         .diagnosis-box .diag-severity {
             background: rgba(74, 108, 247, 0.12);
             padding: 6px 16px;
@@ -626,7 +543,6 @@
             gap: 8px;
             align-self: flex-start;
         }
-
         .diagnosis-box .diag-severity .sev-dot {
             display: inline-block;
             width: 10px;
@@ -642,22 +558,18 @@
         .sev-severe .sev-dot {
             background: #fc8181;
         }
-
-        /* Charts (Mobile) */
         .charts-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 18px;
             margin: 16px 0 20px;
         }
-
         .chart-box {
             background: #f7fafc;
             border-radius: 14px;
             padding: 14px 10px 10px;
             border: 1px solid #edf2f7;
         }
-
         .chart-box .chart-title {
             font-size: 13px;
             font-weight: 600;
@@ -665,18 +577,14 @@
             text-align: center;
             margin-bottom: 8px;
         }
-
         .chart-box canvas {
             width: 100% !important;
             height: auto !important;
             max-height: 180px;
         }
-
-        /* Summary Table (Mobile) */
         .summary-section {
             margin-top: 12px;
         }
-
         .summary-section h3 {
             font-size: 15px;
             font-weight: 600;
@@ -686,29 +594,24 @@
             align-items: center;
             gap: 8px;
         }
-
         .summary-section h3 i {
             color: #4a6cf7;
         }
-
         .summary-table-wrap {
             overflow-x: auto;
             border-radius: 12px;
             border: 1px solid #edf2f7;
             -webkit-overflow-scrolling: touch;
         }
-
         .summary-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 13px;
             min-width: 320px;
         }
-
         .summary-table thead {
             background: #f7fafc;
         }
-
         .summary-table th {
             padding: 10px 12px;
             text-align: left;
@@ -719,13 +622,11 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
-
         .summary-table td {
             padding: 10px 12px;
             border-bottom: 1px solid #edf2f7;
             color: #2d3748;
         }
-
         .summary-table .status-badge {
             display: inline-block;
             padding: 2px 12px;
@@ -733,12 +634,10 @@
             font-size: 11px;
             font-weight: 600;
         }
-
         .status-badge.present {
             background: #fef2f2;
             color: #c53030;
         }
-
         .summary-table .cat-tag {
             font-size: 10px;
             background: #e2e8f0;
@@ -748,8 +647,6 @@
             font-weight: 500;
             white-space: nowrap;
         }
-
-        /* Questions & Notes (Mobile) */
         .question-item {
             display: inline-block;
             background: #f7fafc;
@@ -759,12 +656,10 @@
             font-size: 13px;
             border: 1px solid #e2e8f0;
         }
-
         .question-item i {
             color: #38a169;
             margin-right: 6px;
         }
-
         .notes-display {
             background: #f7fafc;
             padding: 12px 16px;
@@ -774,8 +669,6 @@
             white-space: pre-wrap;
             font-size: 14px;
         }
-
-        /* Report Footer */
         .report-footer {
             margin-top: 18px;
             padding-top: 16px;
@@ -786,7 +679,6 @@
             font-size: 12px;
             color: #a0aec0;
         }
-
         .report-footer .print-btn {
             background: none;
             border: 1px solid #e2e8f0;
@@ -806,12 +698,10 @@
             touch-action: manipulation;
             min-height: 48px;
         }
-
         .report-footer .print-btn:active {
             background: #f7fafc;
             transform: scale(0.97);
         }
-
         .report-footer .credit {
             font-size: 11px;
             color: #a0aec0;
@@ -821,17 +711,13 @@
             padding-top: 12px;
             margin-top: 4px;
         }
-
-        /* Preview Panel (Mobile) */
         #previewStats {
             padding: 16px 0;
             font-size: 14px;
         }
-
         #previewCount span {
             font-size: 28px;
         }
-
         #previewTags {
             margin-top: 12px;
             gap: 6px;
@@ -840,8 +726,6 @@
             font-size: 11px !important;
             padding: 4px 10px !important;
         }
-
-        /* Toast (Mobile: bottom center) */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -863,20 +747,16 @@
             pointer-events: none;
             text-align: left;
         }
-
         .toast.show {
             transform: translateY(0);
             opacity: 1;
             pointer-events: auto;
         }
-
         .toast i {
             font-size: 22px;
             color: #68d391;
             flex-shrink: 0;
         }
-
-        /* Textarea for notes */
         textarea {
             width: 100%;
             padding: 12px 14px;
@@ -895,12 +775,11 @@
             box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.12);
         }
 
-        /* Tablet / Desktop adjustments */
+        /* Tablet / Desktop */
         @media (min-width: 640px) {
             .checkbox-grid {
                 grid-template-columns: 1fr 1fr;
             }
-
             .action-row {
                 flex-direction: row;
                 flex-wrap: wrap;
@@ -910,7 +789,6 @@
                 flex: 1 1 auto;
                 min-width: 140px;
             }
-
             .report-header {
                 flex-direction: row;
                 align-items: center;
@@ -919,7 +797,6 @@
             .report-header .report-badge {
                 align-self: center;
             }
-
             .diagnosis-box {
                 flex-direction: row;
                 align-items: center;
@@ -931,7 +808,6 @@
             .diagnosis-box .diag-severity {
                 align-self: center;
             }
-
             .report-footer {
                 flex-direction: row;
                 flex-wrap: wrap;
@@ -947,11 +823,9 @@
                 padding-top: 0;
                 margin-top: 0;
             }
-
             .charts-grid {
                 grid-template-columns: 1fr 1fr;
             }
-
             .app-header {
                 flex-direction: row;
                 align-items: center;
@@ -965,13 +839,11 @@
                 font-size: 12px;
                 padding: 4px 14px;
             }
-
             .voice-recorder .rec-controls .btn-rec {
                 flex: 0 1 auto;
                 min-width: 100px;
             }
         }
-
         @media (min-width: 1024px) {
             .main-grid {
                 grid-template-columns: 1fr 1fr;
@@ -992,8 +864,6 @@
                 padding: 12px 28px;
             }
         }
-
-        /* Print styles */
         @media print {
             body {
                 padding: 0.3in;
@@ -1082,7 +952,6 @@
                     <span class="sub">— සාකච්ඡා අතරතුර</span>
                 </div>
 
-                <!-- Patient Name -->
                 <div class="patient-input-group">
                     <label for="patientName"><i class="fas fa-user-circle"></i> රෝගියාගේ නම</label>
                     <input type="text" id="patientName" placeholder="උදා: කුමාරි සිල්වා" />
@@ -1169,7 +1038,7 @@
                         </div>
                     </div>
 
-                    <!-- ===== VOICE RECORDING ===== -->
+                    <!-- Voice Recording -->
                     <div class="voice-recorder no-print">
                         <div class="rec-header">
                             <div class="rec-title"><i class="fas fa-microphone-alt"></i> හඬ පටිගත කිරීම</div>
@@ -1294,7 +1163,7 @@
                     <div id="notesDisplay" class="notes-display" style="display:none;"></div>
                 </div>
 
-                <!-- Recording info in report -->
+                <!-- Recording info -->
                 <div class="summary-section" style="margin-top:16px;">
                     <h3><i class="fas fa-microphone-alt"></i> ශ්‍රව්‍ය පටිගත කිරීම</h3>
                     <div id="recordingReportInfo" style="font-size:14px; color:#4a5568;">
@@ -1332,7 +1201,7 @@
         (function() {
             'use strict';
 
-            // ----- DOM refs -----
+            // ----- DOM refs (unchanged) -----
             const patientNameInput = document.getElementById('patientName');
             const generateBtn = document.getElementById('generateBtn');
             const selectAllBtn = document.getElementById('selectAllBtn');
@@ -1368,7 +1237,7 @@
             const recDot = document.getElementById('recDot');
             const recFileName = document.getElementById('recFileName');
 
-            // ----- Recording variables -----
+            // ----- Recording variables (unchanged) -----
             let mediaRecorder = null;
             let audioChunks = [];
             let recordingBlob = null;
@@ -1377,7 +1246,7 @@
             let seconds = 0;
             let isRecording = false;
 
-            // ----- Symptoms & Questions -----
+            // ----- Symptoms & Questions (unchanged) -----
             const symptomCheckboxes = document.querySelectorAll(
                 '#symptomForm .checkbox-grid:not([data-category="questions"]) input[type="checkbox"]');
             const questionCheckboxes = document.querySelectorAll(
@@ -1399,7 +1268,7 @@
             let pieChartInstance = null;
             let barChartInstance = null;
 
-            // ----- Toast helper -----
+            // ----- Toast helper (unchanged) -----
             function showToast(msg, icon = 'fa-check-circle') {
                 toastMsg.textContent = msg;
                 toast.querySelector('i').className = 'fas ' + icon;
@@ -1408,7 +1277,7 @@
                 toast._hideTimer = setTimeout(() => toast.classList.remove('show'), 3500);
             }
 
-            // ----- Update preview (symptoms only) -----
+            // ----- Update preview (unchanged) -----
             function updatePreview() {
                 const checked = document.querySelectorAll(
                     '#symptomForm .checkbox-grid:not([data-category="questions"]) input[type="checkbox"]:checked');
@@ -1439,14 +1308,13 @@
 
             symptomCheckboxes.forEach(cb => cb.addEventListener('change', updatePreview));
 
-            // ----- Reset -----
+            // ----- Reset (unchanged) -----
             resetBtn.addEventListener('click', function() {
                 document.querySelectorAll('#symptomForm input[type="checkbox"]').forEach(cb => cb.checked = false);
                 notesInput.value = '';
                 setTimeout(updatePreview, 50);
                 reportSection.classList.remove('visible');
                 destroyCharts();
-                // Also reset recording
                 if (isRecording) stopRecording();
                 recordingBlob = null;
                 recordingFileName = '';
@@ -1456,15 +1324,14 @@
                 showToast('සියල්ල ඉවත් කරන ලදී', 'fa-undo-alt');
             });
 
-            // ----- Select all symptoms -----
+            // ----- Select all (unchanged) -----
             selectAllBtn.addEventListener('click', function() {
                 symptomCheckboxes.forEach(cb => cb.checked = true);
                 updatePreview();
                 showToast('සියලු රෝග ලක්ෂණ තෝරාගන්නා ලදී', 'fa-check-double');
             });
 
-            // ========== VOICE RECORDING ==========
-            // Generate filename from patient name and date
+            // ========== VOICE RECORDING (unchanged) ==========
             function generateRecordingFileName() {
                 const name = patientNameInput.value.trim() || 'රෝගියා';
                 const now = new Date();
@@ -1477,23 +1344,19 @@
                 return `${name}_${dateStr}.wav`;
             }
 
-            // Format time
             function formatTime(sec) {
                 const m = String(Math.floor(sec / 60)).padStart(2, '0');
                 const s = String(sec % 60).padStart(2, '0');
                 return `${m}:${s}`;
             }
 
-            // Start recording
             async function startRecording() {
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                     mediaRecorder = new MediaRecorder(stream);
                     audioChunks = [];
                     mediaRecorder.ondataavailable = event => {
-                        if (event.data.size > 0) {
-                            audioChunks.push(event.data);
-                        }
+                        if (event.data.size > 0) audioChunks.push(event.data);
                     };
                     mediaRecorder.onstop = () => {
                         const blob = new Blob(audioChunks, { type: 'audio/wav' });
@@ -1502,7 +1365,6 @@
                         recFileName.textContent = `ගොනු නාමය: ${recordingFileName}`;
                         recDownloadBtn.disabled = false;
                         recordingFileInfo.textContent = `ශ්‍රව්‍ය පටිගත කිරීම: ${recordingFileName}`;
-                        // Stop timer
                         clearInterval(timerInterval);
                         recDot.classList.remove('recording');
                         recStatusLabel.textContent = 'නැවතුම';
@@ -1533,7 +1395,6 @@
             function stopRecording() {
                 if (mediaRecorder && isRecording) {
                     mediaRecorder.stop();
-                    // Stop all tracks
                     mediaRecorder.stream.getTracks().forEach(track => track.stop());
                     clearInterval(timerInterval);
                     recDot.classList.remove('recording');
@@ -1544,7 +1405,6 @@
                 }
             }
 
-            // Download recording
             function downloadRecording() {
                 if (recordingBlob) {
                     const url = URL.createObjectURL(recordingBlob);
@@ -1559,17 +1419,16 @@
                 }
             }
 
-            // Event listeners for recording
             recStartBtn.addEventListener('click', startRecording);
             recStopBtn.addEventListener('click', stopRecording);
             recDownloadBtn.addEventListener('click', downloadRecording);
 
-            // If user leaves page, stop recording
             window.addEventListener('beforeunload', function() {
                 if (isRecording) stopRecording();
             });
 
-            // ===== Diagnosis engine with Category =====
+            // ========== NEW ENHANCED DIAGNOSIS ENGINE ==========
+            // This now covers a wide range of mental disorder categories.
             function generateDiagnosis(symptoms) {
                 const names = symptoms.map(s => s.name);
                 const cats = symptoms.map(s => s.category);
@@ -1580,138 +1439,234 @@
                 const physCount = catCount['ශාරීරික හා සංජානන'] || 0;
                 const total = symptoms.length;
 
+                // ---- symptom presence booleans ----
                 const hasDepression = names.includes('මානසික අවපීඩනය');
                 const hasAnxiety = names.includes('කාංසාව');
                 const hasMoodSwing = names.includes('මනෝභාවයේ උච්චාවචනය');
-                const hasFear = names.includes('භීතිය');
-                const hasSelfHarm = names.includes('ආත්ම හානි');
-                const hasDeathThoughts = names.includes('මරණය පිළිබඳ සිතුවිලි');
-                const hasSleepIssue = names.includes('නින්ද නොයාම');
-                const hasSocialWithdrawal = names.includes('සමාජ හුදෙකලාව');
-                const hasAggression = names.includes('ආක්‍රමණශීලීත්වය');
-                const hasHyperactivity = names.includes('අධික ක්‍රියාකාරීත්වය');
+                const hasDelusion = names.includes('අතිශයෝක්තියෙන් යුත් සිතීම');
+                const hasLowSelfEsteem = names.includes('ආත්ම විශ්වාසය අඩුවීම');
+                const hasLoneliness = names.includes('තනිකම');
+                const hasStress = names.includes('ආතතිය');
+                const hasFlatAffect = names.includes('චිත්ත වේගය අඩුවීම');
                 const hasObsession = names.includes('උමතුව');
+                const hasFear = names.includes('භීතිය');
                 const hasPanic = names.includes('අධික කනස්සල්ල');
                 const hasConfusion = names.includes('ව්‍යාකූලත්වය');
-                const hasAttentionIssue = names.includes('අවධානය යොමු කිරීමේ අපහසුව');
 
-                let diagnosis = 'මානසික සෞඛ්‍ය තක්සේරුව';
-                let severity = 'මධ්‍යස්ථ';
+                const hasSocialOpposition = names.includes('සමාජ විරුද්ධතාව');
+                const hasAnger = names.includes('කෝපය');
+                const hasPhobia = names.includes('බිය');
+                const hasDecisionDifficulty = names.includes('තීරණ ගැනීමේ අපහසුව');
+                const hasEatingDisorder = names.includes('ආහාර ගැනීමේ අක්රමිකතා');
+                const hasRumination = names.includes('සිතුවිලි එකතු වීම');
+                const hasAggression = names.includes('ආක්‍රමණශීලීත්වය');
+                const hasHyperactivity = names.includes('අධික ක්‍රියාකාරීත්වය');
+                const hasSocialWithdrawal = names.includes('සමාජ හුදෙකලාව');
+                const hasRepetitiveBehavior = names.includes('පුනරාවර්තන හැසිරීම්');
+                const hasImpulsivity = names.includes('ආවේගශීලීත්වය');
+                const hasExcessiveTalk = names.includes('අධික කතාබහ');
+
+                const hasInsomnia = names.includes('නින්ද නොයාම');
+                const hasAttentionIssue = names.includes('අවධානය යොමු කිරීමේ අපහසුව');
+                const hasMemoryIssue = names.includes('මතකය දුර්වල වීම');
+                const hasSomatic = names.includes('ශාරීරික රෝග ලක්ෂණ (හිසරදය, තෙහෙට්ටුව)');
+                const hasSelfHarm = names.includes('ආත්ම හානි');
+                const hasDeathThoughts = names.includes('මරණය පිළිබඳ සිතුවිලි');
+                const hasHeadache = names.includes('හිසරදය');
+                const hasAppetiteChange = names.includes('ආහාර රුචිය වෙනස්වීම');
+                const hasFatigue = names.includes('තෙහෙට්ටුව');
+                const hasBreathingIssue = names.includes('ශ්වසන ගැටළු');
+                const hasPalpitations = names.includes('හෘද ස්පන්දන වේගය වැඩිවීම');
+                const hasDizziness = names.includes('කරකැවිල්ල');
+
+                // ---- define result variables ----
+                let diagnosis = 'මානසික සෞඛ්‍ය තක්සේරුව (Mental Health Assessment)';
+                let severity = 'මධ්‍යස්ථ (Moderate)';
                 let sevClass = 'sev-moderate';
                 let category = 'වෙනත් මානසික ආබාධ (Other Mental Disorders)';
 
-                // ----- Severe / Critical -----
+                // ----- CRITICAL / SEVERE (highest priority) -----
                 if (hasSelfHarm || hasDeathThoughts) {
-                    diagnosis = 'බරපතල මානසික අවපීඩනය (Suicidal Ideation)';
-                    severity = 'අතිශය බරපතල';
+                    diagnosis = 'බරපතල මානසික අවපීඩනය (Major Depressive with Suicidal Ideation)';
+                    severity = 'අතිශය බරපතල (Severe)';
                     sevClass = 'sev-severe';
                     category = 'බරපතල මානසික ආබාධ (Severe Mental Disorders)';
-                } 
-                // ----- ADHD / Behavioral Spectrum (EX: ADHD) -----
-                else if (hasAggression && hasHyperactivity && hasAttentionIssue) {
-                    diagnosis = 'අවධානය හා අධි ක්‍රියාකාරී ආබාධය (ADHD)';
-                    severity = 'මධ්‍යස්ථ-බරපතල';
-                    sevClass = 'sev-moderate';
-                    category = 'අවධානය හා හැසිරීම් ආබාධ (ADHD / Behavioral Disorders)';
-                } else if (hasAggression && hasHyperactivity) {
-                    diagnosis = 'හැසිරීම් ආබාධය (ADHD Spectrum)';
-                    severity = 'මධ්‍යස්ථ';
-                    sevClass = 'sev-moderate';
-                    category = 'අවධානය හා හැසිරීම් ආබාධ (ADHD / Behavioral Disorders)';
-                } 
-                // ----- Mood & Anxiety (Depression + Anxiety) -----
-                else if (psychCount >= 5 && hasDepression && hasAnxiety && (hasSleepIssue || hasDeathThoughts)) {
-                    diagnosis = 'බරපතල කාංසා-අවපීඩන ආබාධය';
-                    severity = 'බරපතල';
-                    sevClass = 'sev-severe';
-                    category = 'කාංසා හා මනෝභාව ආබාධ (Anxiety & Mood Disorders)';
-                } else if (psychCount >= 4 && hasDepression && hasAnxiety) {
-                    diagnosis = 'මානසික අවපීඩන හා කාංසා ආබාධය';
-                    severity = 'බරපතල';
-                    sevClass = 'sev-severe';
-                    category = 'කාංසා හා මනෝභාව ආබාධ (Anxiety & Mood Disorders)';
-                } 
-                // ----- Mood Disorders (Bipolar) -----
-                else if (hasMoodSwing && behavCount >= 3) {
-                    diagnosis = 'මනෝභාව ආබාධය (Bipolar Spectrum)';
-                    severity = 'බරපතල';
-                    sevClass = 'sev-severe';
-                    category = 'මනෝභාව ආබාධ (Mood Disorders)';
-                } else if (psychCount >= 3 && hasDepression) {
-                    diagnosis = 'මානසික අවපීඩන ආබාධය';
-                    severity = 'මධ්‍යස්ථ';
-                    sevClass = 'sev-moderate';
-                    category = 'මනෝභාව ආබාධ (Mood Disorders)';
-                } 
-                // ----- Anxiety Disorders -----
-                else if (hasSocialWithdrawal && hasFear && hasAnxiety) {
-                    diagnosis = 'සමාජ කාංසා ආබාධය';
-                    severity = 'මධ්‍යස්ථ';
-                    sevClass = 'sev-moderate';
-                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
-                } else if (psychCount >= 3 && hasAnxiety) {
-                    diagnosis = 'කාංසා ආබාධය';
-                    severity = 'මධ්‍යස්ථ';
-                    sevClass = 'sev-moderate';
-                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
-                } 
-                // ----- OCD / Panic -----
-                else if (hasObsession && (hasPanic || hasFear)) {
-                    diagnosis = 'උමතු-බලවත් ආබාධය (OCD / Panic)';
-                    severity = 'මධ්‍යස්ථ-බරපතල';
-                    sevClass = 'sev-moderate';
-                    category = 'උමතු හා බලවත් ආබාධ (OCD & Panic Disorders)';
-                } 
-                // ----- Psychotic / Confusion -----
-                else if (hasConfusion) {
-                    diagnosis = 'මනෝ විකාර ආබාධය (Psychotic Spectrum)';
-                    severity = 'බරපතල';
+                }
+                // ----- PSYCHOTIC DISORDERS -----
+                else if (hasDelusion && (hasConfusion || hasFlatAffect || hasSocialWithdrawal)) {
+                    diagnosis = 'මනෝ විකාර ආබාධය (Schizophrenia Spectrum / Psychotic Disorder)';
+                    severity = 'බරපතල (Severe)';
                     sevClass = 'sev-severe';
                     category = 'මනෝ විකාර ආබාධ (Psychotic Disorders)';
-                } 
-                // ----- Somatic / Physical -----
-                else if (physCount >= 4 && hasSleepIssue) {
-                    diagnosis = 'ශාරීරික රෝග ලක්ෂණ සහිත ආබාධය';
-                    severity = 'මධ්‍යස්ථ';
+                } else if (hasDelusion && hasConfusion) {
+                    diagnosis = 'මනෝ විකාර ආබාධය (Psychotic Disorder)';
+                    severity = 'බරපතල (Severe)';
+                    sevClass = 'sev-severe';
+                    category = 'මනෝ විකාර ආබාධ (Psychotic Disorders)';
+                }
+                // ----- BIPOLAR / MOOD DISORDERS -----
+                else if (hasMoodSwing && (hasImpulsivity || hasExcessiveTalk || hasHyperactivity) && (hasDepression || hasFlatAffect)) {
+                    diagnosis = 'මනෝභාව ආබාධය (Bipolar Disorder)';
+                    severity = 'බරපතල (Severe)';
+                    sevClass = 'sev-severe';
+                    category = 'මනෝභාව ආබාධ (Mood Disorders)';
+                } else if (hasMoodSwing && (hasDepression || hasAnger)) {
+                    diagnosis = 'මනෝභාව ආබාධය (Mood Disorder)';
+                    severity = 'බරපතල (Severe)';
+                    sevClass = 'sev-severe';
+                    category = 'මනෝභාව ආබාධ (Mood Disorders)';
+                }
+                // ----- ADHD / NEURODEVELOPMENTAL -----
+                else if (hasAttentionIssue && (hasHyperactivity || hasImpulsivity) && (hasDecisionDifficulty || hasExcessiveTalk)) {
+                    diagnosis = 'අවධානය හා අධි ක්‍රියාකාරී ආබාධය (ADHD)';
+                    severity = 'මධ්‍යස්ථ-බරපතල (Moderate-Severe)';
+                    sevClass = 'sev-moderate';
+                    category = 'ස්නායු සංවර්ධන ආබාධ (Neurodevelopmental Disorders)';
+                } else if (hasAttentionIssue && hasHyperactivity) {
+                    diagnosis = 'අවධානය හා අධි ක්‍රියාකාරී ආබාධය (ADHD)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
+                    sevClass = 'sev-moderate';
+                    category = 'ස්නායු සංවර්ධන ආබාධ (Neurodevelopmental Disorders)';
+                }
+                // ----- AUTISM SPECTRUM (if social withdrawal + repetitive behavior + communication difficulties) -----
+                else if (hasSocialWithdrawal && hasRepetitiveBehavior && (hasDecisionDifficulty || hasExcessiveTalk)) {
+                    diagnosis = 'ඔටිසම් වර්ණාවලි ආබාධය (Autism Spectrum Disorder)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
+                    sevClass = 'sev-moderate';
+                    category = 'ස්නායු සංවර්ධන ආබාධ (Neurodevelopmental Disorders)';
+                } else if (hasSocialWithdrawal && hasRepetitiveBehavior) {
+                    diagnosis = 'ඔටිසම් වර්ණාවලි ආබාධය (Autism Spectrum Disorder)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
+                    sevClass = 'sev-moderate';
+                    category = 'ස්නායු සංවර්ධන ආබාධ (Neurodevelopmental Disorders)';
+                }
+                // ----- ANXIETY DISORDERS (Generalized, Social, Panic, Phobia) -----
+                else if (hasAnxiety && hasPanic && (hasPalpitations || hasBreathingIssue || hasDizziness)) {
+                    diagnosis = 'භීතිකා ආබාධය (Panic Disorder)';
+                    severity = 'බරපතල (Severe)';
+                    sevClass = 'sev-severe';
+                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
+                } else if (hasAnxiety && hasFear && hasSocialWithdrawal) {
+                    diagnosis = 'සමාජ කාංසා ආබාධය (Social Anxiety Disorder)';
+                    severity = 'මධ්‍යස්ථ-බරපතල (Moderate-Severe)';
+                    sevClass = 'sev-moderate';
+                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
+                } else if (hasAnxiety && hasFear && (hasPhobia || hasObsession)) {
+                    diagnosis = 'විශේෂිත භීතිකා ආබාධය (Specific Phobia)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
+                    sevClass = 'sev-moderate';
+                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
+                } else if (hasAnxiety && (hasPanic || hasStress) && hasInsomnia) {
+                    diagnosis = 'සාමාන්‍ය කාංසා ආබාධය (Generalized Anxiety Disorder)';
+                    severity = 'මධ්‍යස්ථ-බරපතල (Moderate-Severe)';
+                    sevClass = 'sev-moderate';
+                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
+                } else if (hasAnxiety && (hasStress || hasPanic)) {
+                    diagnosis = 'කාංසා ආබාධය (Anxiety Disorder)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
+                    sevClass = 'sev-moderate';
+                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
+                }
+                // ----- DEPRESSIVE DISORDERS (Major, Dysthymia) -----
+                else if (hasDepression && (hasLowSelfEsteem || hasLoneliness || hasFlatAffect) && (hasInsomnia || hasAppetiteChange || hasFatigue)) {
+                    diagnosis = 'බරපතල මානසික අවපීඩන ආබාධය (Major Depressive Disorder)';
+                    severity = 'බරපතල (Severe)';
+                    sevClass = 'sev-severe';
+                    category = 'මනෝභාව ආබාධ (Mood Disorders)';
+                } else if (hasDepression && (hasLowSelfEsteem || hasLoneliness)) {
+                    diagnosis = 'මානසික අවපීඩන ආබාධය (Depressive Disorder)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
+                    sevClass = 'sev-moderate';
+                    category = 'මනෝභාව ආබාධ (Mood Disorders)';
+                }
+                // ----- OBSESSIVE-COMPULSIVE DISORDERS -----
+                else if (hasObsession && (hasRumination || hasRepetitiveBehavior || hasAnxiety)) {
+                    diagnosis = 'උමතු-බලවත් ආබාධය (Obsessive-Compulsive Disorder)';
+                    severity = 'මධ්‍යස්ථ-බරපතල (Moderate-Severe)';
+                    sevClass = 'sev-moderate';
+                    category = 'උමතු හා බලවත් ආබාධ (OCD & Related Disorders)';
+                }
+                // ----- EATING DISORDERS -----
+                else if (hasEatingDisorder && (hasAppetiteChange || hasLowSelfEsteem) && (hasAnxiety || hasDepression)) {
+                    diagnosis = 'ආහාර ගැනීමේ ආබාධය (Eating Disorder)';
+                    severity = 'බරපතල (Severe)';
+                    sevClass = 'sev-severe';
+                    category = 'ආහාර ගැනීමේ ආබාධ (Eating Disorders)';
+                } else if (hasEatingDisorder || hasAppetiteChange) {
+                    diagnosis = 'ආහාර ගැනීමේ ආබාධය (Eating Disorder)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
+                    sevClass = 'sev-moderate';
+                    category = 'ආහාර ගැනීමේ ආබාධ (Eating Disorders)';
+                }
+                // ----- TRAUMA / PTSD (if fear + anxiety + sleep issues + avoidance) -----
+                else if (hasFear && hasAnxiety && (hasInsomnia || hasHyperactivity) && (hasSocialWithdrawal || hasAnger)) {
+                    diagnosis = 'පශ්චාත් කම්පන ආතති ආබාධය (Post-Traumatic Stress Disorder)';
+                    severity = 'බරපතල (Severe)';
+                    sevClass = 'sev-severe';
+                    category = 'කම්පන හා ආතති ආබාධ (Trauma & Stressor-Related Disorders)';
+                }
+                // ----- PERSONALITY DISORDERS (Borderline features) -----
+                else if (hasMoodSwing && (hasImpulsivity || hasAggression) && (hasSelfHarm || hasFear) && hasLoneliness) {
+                    diagnosis = 'පෞරුෂත්ව ආබාධය (Borderline Personality Disorder)';
+                    severity = 'බරපතල (Severe)';
+                    sevClass = 'sev-severe';
+                    category = 'පෞරුෂත්ව ආබාධ (Personality Disorders)';
+                } else if (hasMoodSwing && hasImpulsivity && hasAnger) {
+                    diagnosis = 'පෞරුෂත්ව ආබාධය (Personality Disorder)';
+                    severity = 'මධ්‍යස්ථ-බරපතල (Moderate-Severe)';
+                    sevClass = 'sev-moderate';
+                    category = 'පෞරුෂත්ව ආබාධ (Personality Disorders)';
+                }
+                // ----- SOMATIC SYMPTOM DISORDERS -----
+                else if (hasSomatic && (hasHeadache || hasFatigue || hasInsomnia) && !hasDepression && !hasAnxiety) {
+                    diagnosis = 'ශාරීරික රෝග ලක්ෂණ ආබාධය (Somatic Symptom Disorder)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
                     sevClass = 'sev-moderate';
                     category = 'ශාරීරික රෝග ලක්ෂණ ආබාධ (Somatic Disorders)';
-                } 
-                // ----- Complex / High total -----
+                }
+                // ----- SUBSTANCE-RELATED (not directly detectable, but we can infer if symptoms like impulsivity, aggression, insomnia etc.) -----
+                // No direct substance symptoms, so skip.
+                // ----- ADHD predominantly inattentive -----
+                else if (hasAttentionIssue && hasMemoryIssue && hasDecisionDifficulty) {
+                    diagnosis = 'අවධානය අඩු ආබාධය (Predominantly Inattentive ADHD)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
+                    sevClass = 'sev-moderate';
+                    category = 'ස්නායු සංවර්ධන ආබාධ (Neurodevelopmental Disorders)';
+                }
+                // ----- GENERAL / MILD / UNSPECIFIED -----
                 else if (total >= 6) {
-                    diagnosis = 'සංකීර්ණ මානසික සෞඛ්‍ය ගැටළු';
-                    severity = 'මධ්‍යස්ථ';
+                    diagnosis = 'සංකීර්ණ මානසික සෞඛ්‍ය ගැටළු (Complex Mental Health Issues)';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
                     sevClass = 'sev-moderate';
                     category = 'සංකීර්ණ මානසික ආබාධ (Complex Mental Disorders)';
-                } 
-                // ----- Mild / General -----
-                else if (total >= 3) {
-                    diagnosis = 'මානසික සෞඛ්‍ය අවදානම';
-                    severity = 'මෘදු-මධ්‍යස්ථ';
+                } else if (total >= 3) {
+                    diagnosis = 'මානසික සෞඛ්‍ය අවදානම (Mental Health Risk)';
+                    severity = 'මෘදු-මධ්‍යස්ථ (Mild-Moderate)';
                     sevClass = 'sev-moderate';
                     category = 'මානසික ආබාධ (Mental Disorders)';
                 } else if (total >= 1) {
-                    diagnosis = 'මෘදු මානසික රෝග ලක්ෂණ';
-                    severity = 'මෘදු';
+                    diagnosis = 'මෘදු මානසික රෝග ලක්ෂණ (Mild Mental Symptoms)';
+                    severity = 'මෘදු (Mild)';
                     sevClass = 'sev-mild';
                     category = 'නිශ්චිත නොවන මෘදු ආබාධ (Unspecified Mild Disorders)';
                 }
 
-                // Adjust severity if very high count
+                // Adjust severity if total very high
                 if (total >= 10 && sevClass !== 'sev-severe') {
-                    severity = 'බරපතල';
+                    severity = 'බරපතල (Severe)';
                     sevClass = 'sev-severe';
                     if (!category.includes('බරපතල')) {
                         category = 'බරපතල සංකීර්ණ මානසික ආබාධ (Severe Complex Disorders)';
                     }
                 } else if (total >= 6 && sevClass === 'sev-mild') {
-                    severity = 'මධ්‍යස්ථ';
+                    severity = 'මධ්‍යස්ථ (Moderate)';
                     sevClass = 'sev-moderate';
                 }
 
                 return { diagnosis, severity, sevClass, category };
             }
 
-            // ----- Generate Report -----
+            // ----- Generate Report (updated to use new diagnosis) -----
             generateBtn.addEventListener('click', function() {
                 const name = patientNameInput.value.trim() || 'රෝගියා';
                 const checkedSymptoms = document.querySelectorAll(
@@ -1731,7 +1686,6 @@
                 const questionTexts = Array.from(checkedQuestions).map(cb => cb.value);
                 const notes = notesInput.value.trim();
 
-                // Set patient name
                 reportPatientName.textContent = name;
                 reportPatientNameFooter.textContent = name;
 
@@ -1759,7 +1713,7 @@
                 });
                 summaryBody.innerHTML = html;
 
-                // Diagnosis & Category
+                // Diagnosis & Category (using new engine)
                 const diag = generateDiagnosis(symptoms);
                 diagnosisTitle.textContent = diag.diagnosis;
                 diagnosisCategory.textContent = diag.category;
@@ -1784,7 +1738,7 @@
                     }
                 }
 
-                // Recording info in report
+                // Recording
                 if (recordingBlob) {
                     recordingFileInfo.textContent = `ශ්‍රව්‍ය පටිගත කිරීම: ${recordingFileName} (${formatTime(seconds)} තත්පර)`;
                 } else {
@@ -1885,7 +1839,7 @@
             // ----- Initial preview update -----
             updatePreview();
 
-            // ----- Enter key on patient name triggers generate -----
+            // ----- Enter key triggers generate -----
             patientNameInput.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -1903,7 +1857,7 @@
                 }, { passive: true });
             });
 
-            console.log('✅ LLSOI Campus Project - Mental Health App loaded.');
+            console.log('✅ LLSOI Campus Project - Enhanced Mental Health App loaded with all major disorder categories.');
         })();
     </script>
 
