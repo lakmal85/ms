@@ -565,8 +565,9 @@
 
         .diagnosis-box .diag-left {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 14px;
+            flex: 1;
         }
 
         .diagnosis-box .diag-left i {
@@ -575,6 +576,11 @@
             background: rgba(74, 108, 247, 0.12);
             padding: 10px;
             border-radius: 14px;
+            margin-top: 2px;
+        }
+
+        .diagnosis-box .diag-left .diag-text {
+            flex: 1;
         }
 
         .diagnosis-box .diag-left .diag-text h3 {
@@ -589,6 +595,23 @@
             color: #1a202c;
             margin-top: 2px;
             line-height: 1.3;
+        }
+
+        .diagnosis-box .diag-left .diag-text .diag-category {
+            font-size: 13px;
+            color: #4a5568;
+            margin-top: 4px;
+            background: rgba(74, 108, 247, 0.08);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid rgba(74, 108, 247, 0.15);
+        }
+
+        .diagnosis-box .diag-left .diag-text .diag-category i {
+            font-size: 12px;
+            color: #4a6cf7;
+            margin-right: 4px;
         }
 
         .diagnosis-box .diag-severity {
@@ -901,6 +924,9 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
+            }
+            .diagnosis-box .diag-left {
+                align-items: center;
             }
             .diagnosis-box .diag-severity {
                 align-self: center;
@@ -1224,6 +1250,10 @@
                         <div class="diag-text">
                             <h3>අවසාන රෝග විනිශ්චය</h3>
                             <h2 id="diagnosisTitle">—</h2>
+                            <div class="diag-category">
+                                <i class="fas fa-tag"></i> 
+                                ආබාධ කාණ්ඩය: <span id="diagnosisCategory" style="font-weight:500;">—</span>
+                            </div>
                         </div>
                     </div>
                     <div class="diag-severity" id="severityBadge">
@@ -1321,6 +1351,7 @@
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toastMsg');
             const diagnosisTitle = document.getElementById('diagnosisTitle');
+            const diagnosisCategory = document.getElementById('diagnosisCategory');
             const severityLabel = document.getElementById('severityLabel');
             const severityBadge = document.getElementById('severityBadge');
             const questionsList = document.getElementById('questionsList');
@@ -1538,7 +1569,7 @@
                 if (isRecording) stopRecording();
             });
 
-            // ===== Diagnosis engine =====
+            // ===== Diagnosis engine with Category =====
             function generateDiagnosis(symptoms) {
                 const names = symptoms.map(s => s.name);
                 const cats = symptoms.map(s => s.category);
@@ -1562,72 +1593,122 @@
                 const hasObsession = names.includes('උමතුව');
                 const hasPanic = names.includes('අධික කනස්සල්ල');
                 const hasConfusion = names.includes('ව්‍යාකූලත්වය');
+                const hasAttentionIssue = names.includes('අවධානය යොමු කිරීමේ අපහසුව');
 
                 let diagnosis = 'මානසික සෞඛ්‍ය තක්සේරුව';
                 let severity = 'මධ්‍යස්ථ';
                 let sevClass = 'sev-moderate';
+                let category = 'වෙනත් මානසික ආබාධ (Other Mental Disorders)';
 
+                // ----- Severe / Critical -----
                 if (hasSelfHarm || hasDeathThoughts) {
                     diagnosis = 'බරපතල මානසික අවපීඩනය (Suicidal Ideation)';
                     severity = 'අතිශය බරපතල';
                     sevClass = 'sev-severe';
-                } else if (psychCount >= 5 && hasDepression && hasAnxiety && (hasSleepIssue || hasDeathThoughts)) {
-                    diagnosis = 'බරපතල කාංසා-අවපීඩන ආබාධය';
-                    severity = 'බරපතල';
-                    sevClass = 'sev-severe';
-                } else if (psychCount >= 4 && hasDepression && hasAnxiety) {
-                    diagnosis = 'මානසික අවපීඩන හා කාංසා ආබාධය';
-                    severity = 'බරපතල';
-                    sevClass = 'sev-severe';
-                } else if (hasMoodSwing && behavCount >= 3) {
-                    diagnosis = 'මනෝභාව ආබාධය (Bipolar Spectrum)';
-                    severity = 'බරපතල';
-                    sevClass = 'sev-severe';
-                } else if (hasObsession && (hasPanic || hasFear)) {
-                    diagnosis = 'උමතු-බලවත් ආබාධය (OCD / Panic)';
+                    category = 'බරපතල මානසික ආබාධ (Severe Mental Disorders)';
+                } 
+                // ----- ADHD / Behavioral Spectrum (EX: ADHD) -----
+                else if (hasAggression && hasHyperactivity && hasAttentionIssue) {
+                    diagnosis = 'අවධානය හා අධි ක්‍රියාකාරී ආබාධය (ADHD)';
                     severity = 'මධ්‍යස්ථ-බරපතල';
                     sevClass = 'sev-moderate';
-                } else if (hasSocialWithdrawal && hasFear && hasAnxiety) {
-                    diagnosis = 'සමාජ කාංසා ආබාධය';
-                    severity = 'මධ්‍යස්ථ';
-                    sevClass = 'sev-moderate';
+                    category = 'අවධානය හා හැසිරීම් ආබාධ (ADHD / Behavioral Disorders)';
                 } else if (hasAggression && hasHyperactivity) {
                     diagnosis = 'හැසිරීම් ආබාධය (ADHD Spectrum)';
                     severity = 'මධ්‍යස්ථ';
                     sevClass = 'sev-moderate';
+                    category = 'අවධානය හා හැසිරීම් ආබාධ (ADHD / Behavioral Disorders)';
+                } 
+                // ----- Mood & Anxiety (Depression + Anxiety) -----
+                else if (psychCount >= 5 && hasDepression && hasAnxiety && (hasSleepIssue || hasDeathThoughts)) {
+                    diagnosis = 'බරපතල කාංසා-අවපීඩන ආබාධය';
+                    severity = 'බරපතල';
+                    sevClass = 'sev-severe';
+                    category = 'කාංසා හා මනෝභාව ආබාධ (Anxiety & Mood Disorders)';
+                } else if (psychCount >= 4 && hasDepression && hasAnxiety) {
+                    diagnosis = 'මානසික අවපීඩන හා කාංසා ආබාධය';
+                    severity = 'බරපතල';
+                    sevClass = 'sev-severe';
+                    category = 'කාංසා හා මනෝභාව ආබාධ (Anxiety & Mood Disorders)';
+                } 
+                // ----- Mood Disorders (Bipolar) -----
+                else if (hasMoodSwing && behavCount >= 3) {
+                    diagnosis = 'මනෝභාව ආබාධය (Bipolar Spectrum)';
+                    severity = 'බරපතල';
+                    sevClass = 'sev-severe';
+                    category = 'මනෝභාව ආබාධ (Mood Disorders)';
                 } else if (psychCount >= 3 && hasDepression) {
                     diagnosis = 'මානසික අවපීඩන ආබාධය';
                     severity = 'මධ්‍යස්ථ';
                     sevClass = 'sev-moderate';
+                    category = 'මනෝභාව ආබාධ (Mood Disorders)';
+                } 
+                // ----- Anxiety Disorders -----
+                else if (hasSocialWithdrawal && hasFear && hasAnxiety) {
+                    diagnosis = 'සමාජ කාංසා ආබාධය';
+                    severity = 'මධ්‍යස්ථ';
+                    sevClass = 'sev-moderate';
+                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
                 } else if (psychCount >= 3 && hasAnxiety) {
                     diagnosis = 'කාංසා ආබාධය';
                     severity = 'මධ්‍යස්ථ';
                     sevClass = 'sev-moderate';
-                } else if (physCount >= 4 && hasSleepIssue) {
+                    category = 'කාංසා ආබාධ (Anxiety Disorders)';
+                } 
+                // ----- OCD / Panic -----
+                else if (hasObsession && (hasPanic || hasFear)) {
+                    diagnosis = 'උමතු-බලවත් ආබාධය (OCD / Panic)';
+                    severity = 'මධ්‍යස්ථ-බරපතල';
+                    sevClass = 'sev-moderate';
+                    category = 'උමතු හා බලවත් ආබාධ (OCD & Panic Disorders)';
+                } 
+                // ----- Psychotic / Confusion -----
+                else if (hasConfusion) {
+                    diagnosis = 'මනෝ විකාර ආබාධය (Psychotic Spectrum)';
+                    severity = 'බරපතල';
+                    sevClass = 'sev-severe';
+                    category = 'මනෝ විකාර ආබාධ (Psychotic Disorders)';
+                } 
+                // ----- Somatic / Physical -----
+                else if (physCount >= 4 && hasSleepIssue) {
                     diagnosis = 'ශාරීරික රෝග ලක්ෂණ සහිත ආබාධය';
                     severity = 'මධ්‍යස්ථ';
                     sevClass = 'sev-moderate';
-                } else if (total >= 6) {
+                    category = 'ශාරීරික රෝග ලක්ෂණ ආබාධ (Somatic Disorders)';
+                } 
+                // ----- Complex / High total -----
+                else if (total >= 6) {
                     diagnosis = 'සංකීර්ණ මානසික සෞඛ්‍ය ගැටළු';
                     severity = 'මධ්‍යස්ථ';
                     sevClass = 'sev-moderate';
-                } else if (total >= 3) {
+                    category = 'සංකීර්ණ මානසික ආබාධ (Complex Mental Disorders)';
+                } 
+                // ----- Mild / General -----
+                else if (total >= 3) {
                     diagnosis = 'මානසික සෞඛ්‍ය අවදානම';
                     severity = 'මෘදු-මධ්‍යස්ථ';
                     sevClass = 'sev-moderate';
+                    category = 'මානසික ආබාධ (Mental Disorders)';
                 } else if (total >= 1) {
                     diagnosis = 'මෘදු මානසික රෝග ලක්ෂණ';
                     severity = 'මෘදු';
                     sevClass = 'sev-mild';
+                    category = 'නිශ්චිත නොවන මෘදු ආබාධ (Unspecified Mild Disorders)';
                 }
+
+                // Adjust severity if very high count
                 if (total >= 10 && sevClass !== 'sev-severe') {
                     severity = 'බරපතල';
                     sevClass = 'sev-severe';
+                    if (!category.includes('බරපතල')) {
+                        category = 'බරපතල සංකීර්ණ මානසික ආබාධ (Severe Complex Disorders)';
+                    }
                 } else if (total >= 6 && sevClass === 'sev-mild') {
                     severity = 'මධ්‍යස්ථ';
                     sevClass = 'sev-moderate';
                 }
-                return { diagnosis, severity, sevClass };
+
+                return { diagnosis, severity, sevClass, category };
             }
 
             // ----- Generate Report -----
@@ -1678,9 +1759,10 @@
                 });
                 summaryBody.innerHTML = html;
 
-                // Diagnosis
+                // Diagnosis & Category
                 const diag = generateDiagnosis(symptoms);
                 diagnosisTitle.textContent = diag.diagnosis;
+                diagnosisCategory.textContent = diag.category;
                 severityLabel.textContent = diag.severity;
                 severityBadge.className = 'diag-severity ' + diag.sevClass;
 
